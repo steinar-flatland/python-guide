@@ -27,7 +27,7 @@
     - [4.5. Underscores and Visibility](#45-underscores-and-visibility)
     - [4.6. Modules And Packages](#46-modules-and-packages)
     - [4.7. Style Guidance](#47-style-guidance)
-    - [4.8. TL;DR](#48-tldr)
+    - [4.8. Summary](#48-summary)
   - [5. Control Flow](#5-control-flow)
     - [5.1. if Statement](#51-if-statement)
     - [5.2. for Loop](#52-for-loop)
@@ -36,7 +36,18 @@
     - [5.5. No switch Or case Statement](#55-no-switch-or-case-statement)
     - [5.6. match Statement](#56-match-statement)
     - [5.7. else With Loops](#57-else-with-loops)
-    - [5.8. TL;DR](#58-tldr)
+    - [5.8. Summary](#58-summary)
+  - [6. Operators And Precedence](#6-operators-and-precedence)
+    - [6.1. Arithmetic Operators](#61-arithmetic-operators)
+    - [6.2. Comparison Operators](#62-comparison-operators)
+    - [6.3. Logical Operators](#63-logical-operators)
+    - [6.4. Identity Versus Equality](#64-identity-versus-equality)
+    - [6.5. Boolean Values](#65-boolean-values)
+    - [6.6. Bitwise Operators](#66-bitwise-operators)
+    - [6.7. Assignment Expressions](#67-assignment-expressions)
+    - [6.8. Operator Precedence](#68-operator-precedence)
+    - [6.9. Summary](#69-summary)
+  - [7. Core Data Structures](#7-core-data-structures)
 <!--END_TOC-->
 
 This is a quick introduction to Python for experienced programmers who are relatively new to Python.  This guide does not pretend to be a replacement for the full [Python Tutorial](https://docs.python.org/3/tutorial/index.html).  This guide aims to provide value through a curated selection of important knowledge that helps an experienced programmer get started quickly.
@@ -327,7 +338,7 @@ my_package/
 - Choose clear names over short ones &mdash; Python values readability over brevity.
 - Let tools like the [black](https://github.com/psf/black) code formatter, the [flake8](https://flake8.pycqa.org/en/latest/) linter, or your IDE guide you.  Tools like this typically apply [PEP 8](https://peps.python.org/pep-0008/) by default.
 
-### 4.8. TL;DR
+### 4.8. Summary
 
 Use `snake_case` for most things, `PascalCase` for classes, `ALL_CAPS` for constants. Avoid `camelCase`. Use `_` to signal internal use, and `__dunder__` only for Python’s special methods.
 
@@ -457,7 +468,7 @@ else:
 
 This is an uncommon feature but occasionally useful in search patterns.
 
-### 5.8. TL;DR
+### 5.8. Summary
 
 - Use `if` / `elif` / `else` for conditional logic.
 - Python’s `for` loops iterate over sequences, not numeric indices.
@@ -469,3 +480,171 @@ This is an uncommon feature but occasionally useful in search patterns.
 - Loops support an optional `else` clause that runs if not exited by `break`.
 
 ("dict" is the Python term for what is known as a dictionary or map in other languages.  Python has a built-in type `dict`.)
+
+## 6. Operators And Precedence
+
+Python supports common arithmetic, comparison, logical, and bitwise operators. Precedence rules are similar to those in C-like languages, though Python encourages the use of parentheses to make expressions readable.
+
+### 6.1. Arithmetic Operators
+
+```python
+a + b    # addition
+a - b    # subtraction
+a * b    # multiplication
+a / b    # division (always returns float)
+a // b   # integer (floor) division
+a % b    # modulus
+a ** b   # exponentiation
+```
+
+> Note: `/` always returns a float, even if both operands are integers.
+
+### 6.2. Comparison Operators
+
+```python
+a == b    # equal
+a != b    # not equal
+a < b     # less than
+a <= b    # less than or equal
+a > b     # greater than
+a >= b    # greater than or equal
+```
+
+Python supports chained comparisons:
+
+```python
+if 0 < x < 10:
+    ...
+```
+
+This is equivalent to `(0 < x) and (x < 10)`, and is idiomatic in Python.
+
+### 6.3. Logical Operators
+
+```python
+a and b
+a or b
+not a
+```
+
+Python uses these keywords rather than `&&`, `||`, or `!`. Logical expressions short-circuit as in other C-like languages:
+
+```python
+if a is not None and a > 0:
+    ...
+```
+
+(`None` is a singleton object that represents the absence of a value or a null value.  This is covered in greater depth in the section on [Core Data Structures](#7-core-data-structures).)
+
+### 6.4. Identity Versus Equality
+
+Python distinguishes between **equality** (`==`) and **identity** (`is`):
+
+```python
+a == b    # values are equal
+a is b    # objects are identical (same memory)
+```
+
+Use `is` when comparing to `None`.
+
+```python
+if value is None:
+    ...
+```
+
+In general, use `==` to compare values.
+
+### 6.5. Boolean Values
+
+Python has `True` and `False`, both capitalized. These are of type `bool`, which is a subclass of `int`:
+
+```python
+True == 1     # True
+False == 0    # True
+```
+
+This behavior exists for historical reasons. It’s better to treat booleans as distinct from numbers.
+
+### 6.6. Bitwise Operators
+
+```python
+a & b     # bitwise AND
+a | b     # bitwise OR
+a ^ b     # bitwise XOR
+~a        # bitwise NOT
+a << n    # left shift
+a >> n    # right shift
+```
+
+Same syntax and behavior as in C-like languages.
+
+### 6.7. Assignment Expressions
+
+Python 3.8 introduced the **assignment expression operator** `:=`, sometimes called the “walrus operator.” It allows you to assign a value to a variable **as part of an expression**.
+
+```python
+if (n := len(data)) > 0:
+    print(f"{n} items found.")
+```
+
+This is equivalent to:
+
+```python
+n = len(data)
+if n > 0:
+    print(f"{n} items found.")
+```
+
+Assignment expressions are useful when:
+
+- You want to **avoid repeating a costly or verbose expression**
+- You need to **both capture a value and test it**
+
+> Avoid overusing `:=`. It's best used when it improves clarity, not just to write fewer lines. For simple cases, regular assignment remains more readable.
+
+### 6.8. Operator Precedence
+
+The table below shows a simplified but complete view of operator precedence. Operators higher in the list bind more tightly than those lower down.
+
+| Precedence (high → low)   | Category               | Operators & Examples                            |
+|---------------------------|------------------------|--------------------------------------------------|
+| 1                         | **Parentheses**        | `( ... )` — grouping, overrides precedence       |
+| 2                         | **Exponentiation**     | `**`                                             |
+| 3                         | **Unary**              | `+x`, `-x`, `~x`, `not x`                        |
+| 4                         | **Multiplicative**     | `*`, `/`, `//`, `%`                              |
+| 5                         | **Additive**           | `+`, `-`                                         |
+| 6                         | **Bitwise Shifts**     | `<<`, `>>`                                       |
+| 7                         | **Bitwise AND**        | `&`                                              |
+| 8                         | **Bitwise XOR**        | `^`                                              |
+| 9                         | **Bitwise OR**         | `\|`                                              |
+| 10                        | **Comparisons, Identity, and Membership** | `<`, `<=`, `>`, `>=`, `==`, `!=`<br>`is`, `is not`<br>`in`, `not in` |
+| 11                        | **Boolean `not`**      | `not x`                                          |
+| 12                        | **Boolean `and`**      | `x and y`                                        |
+| 13                        | **Boolean `or`**       | `x or y`                                         |
+| 14                        | **Assignment**         | `=`, `+=`, `-=`, `*=`, `/=`, etc.                |
+| 15                        | **Assignment Expression** | `:=` (walrus operator)                      |
+
+---
+
+**Notes:**
+
+- All comparison, identity, and membership operators share the same precedence level but are grouped by purpose for clarity.
+- Parentheses always win — use them liberally to clarify intent.
+- Logical operators (`not`, `and`, `or`) have relatively low precedence.
+- Bitwise and arithmetic operators follow precedence similar to C/C++.
+- The **walrus operator `:=`** binds even more loosely than `=`, meaning it’s safe to use in conditionals without surprises.
+
+**Additional note:**
+
+> This table is simplified in the sense that it omits a few rarely used constructs (such as `lambda`, attribute access, function calls, and indexing), as well as technical parsing rules like associativity. It includes all core operators introduced in this guide.  For the complete precedence table, see the [official Python documentation](https://docs.python.org/3/reference/expressions.html#operator-precedence).
+
+### 6.9. Summary
+
+- Arithmetic and comparison operators behave as expected.
+- Use `and`, `or`, and `not` — not `&&`, `||`, or `!`.
+- Use `==` for value equality, `is` for object identity.
+- `True` and `False` are of type `bool`, which is a subclass of `int`.
+- Bitwise operators resemble other C-like languages.
+- Operator precedence mostly follows C-like rules, but parentheses are preferred for clarity.
+
+## 7. Core Data Structures
