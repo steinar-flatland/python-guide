@@ -48,6 +48,12 @@
     - [6.8. Operator Precedence](#68-operator-precedence)
     - [6.9. Summary](#69-summary)
   - [7. Core Data Structures](#7-core-data-structures)
+    - [7.1. Lists](#71-lists)
+    - [7.2. Tuples](#72-tuples)
+    - [7.3. Sets](#73-sets)
+    - [7.4. Dictionaries](#74-dictionaries)
+    - [7.5. None](#75-none)
+    - [7.6. Summary](#76-summary)
 <!--END_TOC-->
 
 This is a quick introduction to Python for experienced programmers who are relatively new to Python.  This guide does not pretend to be a replacement for the full [Python Tutorial](https://docs.python.org/3/tutorial/index.html).  This guide aims to provide value through a curated selection of important knowledge that helps an experienced programmer get started quickly.
@@ -648,3 +654,99 @@ The table below shows a simplified but complete view of operator precedence. Ope
 - Operator precedence mostly follows C-like rules, but parentheses are preferred for clarity.
 
 ## 7. Core Data Structures
+
+Python has four core built-in collection types: `list`, `tuple`, `set`, and `dict`. These are the backbone of most Python programs.
+
+> NOTE: This section covers the basics of using these data structures — enough to be productive and avoid surprises. Deeper topics (like comprehensions, unpacking, and iteration patterns) are covered later.
+
+### 7.1. Lists
+
+Lists are ordered, mutable sequences.
+
+```python
+fruits = ["apple", "banana", "cherry"]
+```
+
+- Indexable: `fruits[0] == "apple"`
+- Mutable: `fruits[1] = "blueberry"`
+- Append: `fruits.append("date")`
+- Remove: `fruits.remove("banana")`
+- Length: `len(fruits)`
+
+Lists can contain any type, including other lists.
+
+### 7.2. Tuples
+
+Tuples are ordered, immutable sequences.
+
+```python
+point = (3, 4)
+```
+
+- Indexable: `point[0] == 3`
+- Immutable: cannot reassign `point[1]`
+- Often used for fixed-length groupings
+- Parentheses are optional in many contexts: `x, y = 1, 2` defines a tuple
+
+Single-element tuples require a trailing comma:
+
+```python
+one = (42,)  # this is a tuple
+not_a_tuple = (42)  # just an int
+```
+
+### 7.3. Sets
+
+Sets are unordered collections of unique values.
+
+```python
+nums = {1, 2, 3}
+```
+
+- No duplicates: `{1, 2, 2}` becomes `{1, 2}`
+- Unordered: no index access
+- Add: `nums.add(4)`
+- Remove: `nums.remove(2)`
+- Set operations: union (`|`), intersection (`&`), difference (`-`)
+
+To make an empty set, use `set()` — `{}` creates an empty `dict`.
+
+### 7.4. Dictionaries
+
+Dictionaries (or “dicts”) map keys to values.
+
+```python
+scores = {"Alice": 90, "Bob": 85}
+```
+
+- Keys must be hashable (e.g., strings, numbers, tuples)
+- Values can be anything
+- Access: `scores["Alice"]`
+- Add/update: `scores["Charlie"] = 88`
+- Remove: `del scores["Bob"]`
+- Safe lookup: `scores.get("Dan", 0)`
+
+Use `{}` to define a dict. To define an empty dict, use `{}` or `dict()`.
+
+### 7.5. None
+
+Python uses `None` to represent the absence of a value.
+
+```python
+value = None
+```
+
+- `None` is a singleton — only one instance exists
+- Compare using `is` or `is not` (not `==`)
+- Commonly used as:
+  - Default values
+  - Function return when there’s nothing else to return
+  - Sentinel values
+
+### 7.6. Summary
+
+- Use `list` for general-purpose, ordered, mutable sequences.
+- Use `tuple` for fixed-length, immutable groupings.
+- Use `set` for unique unordered values.
+- Use `dict` for key-value mappings.
+- Use `None` to represent “no value”.
