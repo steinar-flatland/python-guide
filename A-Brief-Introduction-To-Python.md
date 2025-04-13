@@ -16,6 +16,18 @@
     - [2.5. Blank Lines And Grouping](#25-blank-lines-and-grouping)
     - [2.6. Gotchas](#26-gotchas)
   - [3. Comments](#3-comments)
+    - [3.1. Single-Line Comments](#31-single-line-comments)
+    - [3.2. Multi-Line Comments](#32-multi-line-comments)
+    - [3.3. Comment Style](#33-comment-style)
+  - [4. Naming Conventions](#4-naming-conventions)
+    - [4.1. Summary Table](#41-summary-table)
+    - [4.2. Variables And Functions](#42-variables-and-functions)
+    - [4.3. Classes](#43-classes)
+    - [4.4. Constants](#44-constants)
+    - [4.5. Underscores and Visibility](#45-underscores-and-visibility)
+    - [4.6. Modules And Packages](#46-modules-and-packages)
+    - [4.7. Style Guidance](#47-style-guidance)
+    - [4.8. TL;DR](#48-tldr)
 <!--END_TOC-->
 
 This is a quick introduction to Python for experienced programmers who are relatively new to Python.  This guide does not pretend to be a replacement for the full [Python Tutorial](https://docs.python.org/3/tutorial/index.html).  This guide aims to provide value through a curated selection of important knowledge that helps an experienced programmer get started quickly.
@@ -158,3 +170,154 @@ But if needed you can:
 - Accidentally misaligning a line will silently alter logic &mdash; Python won’t warn if the indentation is syntactically valid but semantically wrong.
 
 ## 3. Comments
+
+### 3.1. Single-Line Comments
+
+On any line, the Python interpreter ignores from the first `#` character to end of line.
+
+```python
+# This is a full-line comment explaining the next line
+print("Hello, world!")  # This inline comment is also ignored by Python
+```
+
+When an inline comment follows code on the same line, it is suggested to separate the code and the comment by at least two spaces for readability.
+
+### 3.2. Multi-Line Comments
+
+Unlike some languages (C, Java, etc.), Python does not have a special syntax for multi-line block comments​.  Instead, use multiple successive single-line comments, like this:
+
+```python
+# This is a multi-line comment constructed by
+# prefixing each line with a hash. It can span 
+# multiple lines as needed.
+```
+
+While this may seem inconvenient for developers accustomed to a block comment syntax, modern integrated development environments (IDEs) typically have a feature to comment or uncomment a block of code.  This works around the problem.
+
+Triple-quoted strings (delimited by either `"""` or `'''`) can be used as multi-line comments.  If a string literal appears by itself (not assigned to a variable or used in an expression), it is usually ignored at runtime.  For example:
+
+```python
+"""
+This triple-quoted string is not assigned to any variable,
+so it acts as a multi-line comment. Python skips it entirely
+at runtime.
+"""
+print("This line will execute")
+```
+
+Use the triple-quoted string technique with caution.  A triple-quoted string appearing as the first statement of a function, class, or module is treated as a docstring (documentation string) for the code object rather than as a comment.  When interpreted as a docstring, the triple-quoted string is stored in memory and available for introspection (e.g. via `help()` or `.__doc__`), like this:
+
+```python
+def greet(name):
+    """Return a friendly greeting for the given name."""
+    return f"Hello, {name}!"
+
+# Now access the docstring
+print(greet.__doc__)     # prints the docstring
+help(greet)
+```
+
+(Note: the string `f"Hello, {name}!"` is an example of string interpolation in Python. `f` is short for "formatted string," and it allows you to embed variables or expressions inside `{}`.)
+
+Expected output:
+
+```text
+Return a friendly greeting for the given name.
+Help on function greet in module __main__:
+
+greet(name)
+    Return a friendly greeting for the given name.
+```
+
+To avoid uncertainty regarding whether triple-quoted strings are loaded into memory, some developers stick with the `#` syntax for multi-line comments.
+
+### 3.3. Comment Style
+
+The [PEP 8 Style Guide](https://peps.python.org/pep-0008/#comments) has much to say about commenting style.  Check it out and proceed as you see fit.  This guide skips those details, for brevity.
+
+## 4. Naming Conventions
+
+Python follows naming conventions defined in [PEP 8](https://peps.python.org/pep-0008/).  These aren't enforced by the interpreter, but they are widely followed in the Python community.  Stick to these, and your code will feel "Pythonic."
+
+> NOTE: This section needs to touch on many things in Python that are named, so many new language constructs are mentioned.  An effort has been made to include just enough explanation here to keep the material from feeling disorienting at this stage.  Sections beyond this one provide deeper explanations of topics first mentioned here.
+
+### 4.1. Summary Table
+
+| Use                        | Convention        | Example                    |
+|----------------------------|-------------------|----------------------------|
+| Variables                  | `snake_case`      | `user_id`, `total_count`   |
+| Functions and methods      | `snake_case`      | `process_data()`           |
+| Classes                    | `PascalCase`      | `DataParser`, `UserAuth`   |
+| Constants                  | `ALL_CAPS`        | `MAX_RETRIES`, `PI`        |
+| Module (file) names        | `snake_case.py`   | `data_utils.py`            |
+| Package (folder) names     | `snake_case/`     | `my_library/`              |
+| "Private" members          | `_leading_underscore` | `_internal_helper()`  |
+| Name mangling (rare)       | `__double_leading`   | `__internal_data`       |
+| Special Python methods     | `__dunder__`       | `__init__`, `__str__`      |
+
+(Name mangling is a way to make certain names harder to accidentally access or override. It's mostly used in class code, which we’ll cover later.)
+
+### 4.2. Variables And Functions
+
+Use lowercase with underscores (`snake_case`) for variable names, function names, and method names.
+
+```python
+def calculate_average(values):
+    total = sum(values)
+    return total / len(values)
+```
+
+Avoid `camelCase` and short cryptic names unless truly obvious in context (e.g., i, x, y in a short loop).
+
+### 4.3. Classes
+
+Class names use `PascalCase` (sometimes called `UpperCamelCase`).  Do not use underscores.
+
+```python
+class DataProcessor:
+    def process(self, data):
+        pass
+```
+
+(Note: `pass` is Python for "do nothing".)
+
+### 4.4. Constants
+
+Constants are named in `ALL_CAPS`, typically defined at the top of a module.
+
+```python
+MAX_ATTEMPTS = 5
+PI = 3.14159
+```
+
+### 4.5. Underscores and Visibility
+
+Python doesn’t enforce access restrictions (`private`, `protected`, etc.). Instead, it uses naming conventions:
+
+- `_single_leading_underscore`: intended for internal use &mdash; a hint to readers and tools that it’s not part of the public API.
+- `__double_leading_underscore`: triggers name mangling &mdash; makes the name harder to access from outside (e.g., from subclasses). Rarely used in practice.
+- `__double_underscores__` (“dunder”): reserved for Python-defined special methods like `__init__`, `__str__`, etc. Do not invent your own.
+
+### 4.6. Modules And Packages
+
+- Module names (i.e., `.py` files) should use `snake_case`, all lowercase. Avoid dashes or capital letters.  Examples: `math_utils.py`, `my_script.py`
+- Package names (i.e., folders containing modules) follow the same `snake_case` convention.
+
+The presence of a file named `__init__.py` (even if empty) tells Python to treat the directory as a package.
+
+```text
+my_package/
+├── __init__.py
+├── parser.py
+├── constants.py
+```
+
+### 4.7. Style Guidance
+
+- Avoid names like `l`, `O`, or `I` — they’re visually ambiguous.
+- Choose clear names over short ones — Python values readability over brevity.
+- Let tools like the [black](https://github.com/psf/black) code formatter, the [flake8](https://flake8.pycqa.org/en/latest/) linter, or your IDE guide you — tools like this typically apply [PEP 8](https://peps.python.org/pep-0008/) by default.
+
+### 4.8. TL;DR
+
+Use `snake_case` for most things, `PascalCase` for classes, `ALL_CAPS` for constants. Avoid `camelCase`. Use `_` to signal internal use, and `__dunder__` only for Python’s special methods.
