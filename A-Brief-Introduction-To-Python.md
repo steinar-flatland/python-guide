@@ -28,6 +28,15 @@
     - [4.6. Modules And Packages](#46-modules-and-packages)
     - [4.7. Style Guidance](#47-style-guidance)
     - [4.8. TL;DR](#48-tldr)
+  - [5. Control Flow](#5-control-flow)
+    - [5.1. if Statement](#51-if-statement)
+    - [5.2. for Loop](#52-for-loop)
+    - [5.3. while Loop](#53-while-loop)
+    - [5.4. break And continue](#54-break-and-continue)
+    - [5.5. No switch Or case Statement](#55-no-switch-or-case-statement)
+    - [5.6. match Statement](#56-match-statement)
+    - [5.7. else With Loops](#57-else-with-loops)
+    - [5.8. TL;DR](#58-tldr)
 <!--END_TOC-->
 
 This is a quick introduction to Python for experienced programmers who are relatively new to Python.  This guide does not pretend to be a replacement for the full [Python Tutorial](https://docs.python.org/3/tutorial/index.html).  This guide aims to provide value through a curated selection of important knowledge that helps an experienced programmer get started quickly.
@@ -167,7 +176,7 @@ But if needed you can:
 
 - Indentation must be consistent within a block.
 - Mixing tabs and spaces may work on your machine and fail elsewhere.
-- Accidentally misaligning a line will silently alter logic &mdash; Python won’t warn if the indentation is syntactically valid but semantically wrong.
+- Accidentally misaligning a line will silently alter logic.  Python won’t warn if the indentation is syntactically valid but semantically wrong.
 
 ## 3. Comments
 
@@ -314,10 +323,149 @@ my_package/
 
 ### 4.7. Style Guidance
 
-- Avoid names like `l`, `O`, or `I` — they’re visually ambiguous.
-- Choose clear names over short ones — Python values readability over brevity.
-- Let tools like the [black](https://github.com/psf/black) code formatter, the [flake8](https://flake8.pycqa.org/en/latest/) linter, or your IDE guide you — tools like this typically apply [PEP 8](https://peps.python.org/pep-0008/) by default.
+- Avoid names like `l`, `O`, or `I` &mdash; they’re visually ambiguous.
+- Choose clear names over short ones &mdash; Python values readability over brevity.
+- Let tools like the [black](https://github.com/psf/black) code formatter, the [flake8](https://flake8.pycqa.org/en/latest/) linter, or your IDE guide you.  Tools like this typically apply [PEP 8](https://peps.python.org/pep-0008/) by default.
 
 ### 4.8. TL;DR
 
 Use `snake_case` for most things, `PascalCase` for classes, `ALL_CAPS` for constants. Avoid `camelCase`. Use `_` to signal internal use, and `__dunder__` only for Python’s special methods.
+
+## 5. Control Flow
+
+Python provides standard control flow constructs like `if`, `for`, and `while`, along with a few distinctive features. As with other Python syntax, indentation defines blocks.  There are no braces.
+
+### 5.1. if Statement
+
+```python
+if x > 0:
+    print("Positive")
+elif x == 0:
+    print("Zero")
+else:
+    print("Negative")
+```
+
+- Use `elif` instead of `else if`.
+- Parentheses around conditions are allowed but not required (and not idiomatic).
+- The colon at the end of each control line starts a new block, defined by indentation.
+
+### 5.2. for Loop
+
+Python's `for` loops iterate directly over items in a sequence.
+
+```python
+for name in ["Alice", "Bob", "Charlie"]:
+    print(name)
+```
+
+To iterate over a range of numbers:
+
+```python
+for i in range(5):  # 0 through 4
+    print(i)
+```
+
+To iterate both index and value, use `enumerate()`:
+
+```python
+for i, name in enumerate(["Alice", "Bob"]):
+    print(i, name)
+```
+
+To iterate over two sequences in parallel, use `zip()`:
+
+```python
+for name, score in zip(["Alice", "Bob"], [85, 92]):
+    print(name, score)
+```
+
+### 5.3. while Loop
+
+Python's `while` loops are straightforward:
+
+```python
+while x > 0:
+    print(x)
+    x -= 1
+```
+
+As with `for` loops, indentation defines the block. No parentheses are needed around the condition.
+
+### 5.4. break And continue
+
+These work as in other C-like languages:
+
+```python
+for ch in "hello":
+    if ch == "l":
+        continue
+    if ch == "o":
+        break
+    print(ch)
+```
+
+- `continue` skips to the next iteration.
+- `break` exits the loop.
+
+### 5.5. No switch Or case Statement
+
+Python does not have a `switch` or `case` statement.  Instead, use a chain of `if`/`elif`/`else` statements, or use a dictionary for dispatch, as shown below:
+
+```python
+def handle(choice):
+    return {
+        "start": "Starting...",
+        "stop": "Stopping...",
+        "pause": "Pausing...",
+    }.get(choice, "Unknown command")
+```
+
+The code inside `{}` defines what other languages call a map or dictionary (called a dict in Python).  `get(choice, "Unknown command")` tries to do a lookup in the dict, mapping `choice` to the associated value in the dict.  If the key is not found, `"Unknown command"` is returned instead.
+
+Note that dict lookup using square brackets `[]` is also supported; however, that was not used here by design.  `get()` provides a safe lookup, whereas `[]` throws an error if the key is not found.
+
+### 5.6. match Statement
+
+Starting in Python 3.10, there is a new `match` statement, often referred to as _structural pattern matching_.
+
+```python
+command = "start"
+
+match command:
+    case "start":
+        print("Starting")
+    case "stop":
+        print("Stopping")
+    case _:
+        print("Unknown command") # Default case
+```
+
+It's not quite the same as a `switch` in other languages, because it supports powerful pattern matching, not just value matching.
+
+### 5.7. else With Loops
+
+Python allows an `else` clause on `for` and `while` loops. It runs only if the loop completes normally &mdash; that is, not interrupted by a `break`.
+
+```python
+for x in [1, 2, 3]:
+    if x == 0:
+        break
+else:
+    print("No zero found")  # This line runs
+```
+
+This is an uncommon feature but occasionally useful in search patterns.
+
+### 5.8. TL;DR
+
+- Use `if` / `elif` / `else` for conditional logic.
+- Python’s `for` loops iterate over sequences, not numeric indices.
+- Python's `while` is straightforward.
+- Use `range()`, `enumerate()`, and `zip()` to control iteration.
+- `break` and `continue` work as expected.
+- Python has no `switch`; use `if` chains or dicts instead.
+- Python does have a `match`, which is a bit like a `switch` and supports powerful pattern matching.
+- Loops support an optional `else` clause that runs if not exited by `break`.
+
+("dict" is the Python term for what is known as a dictionary or map in other languages.  Python has a built-in type `dict`.)
