@@ -54,6 +54,14 @@
     - [7.4. Dictionaries](#74-dictionaries)
     - [7.5. None](#75-none)
     - [7.6. Summary](#76-summary)
+  - [8. Functions And Parameter Passing](#8-functions-and-parameter-passing)
+    - [8.1. Defining A Function](#81-defining-a-function)
+    - [8.2. Returning Values](#82-returning-values)
+    - [8.3. Default Parameters](#83-default-parameters)
+    - [8.4. Positional And Keyword Arguments](#84-positional-and-keyword-arguments)
+    - [8.5. Arbitrary Arguments](#85-arbitrary-arguments)
+    - [8.6. Parameter Passing Model](#86-parameter-passing-model)
+    - [8.7. Summary](#87-summary)
 <!--END_TOC-->
 
 This is a quick introduction to Python for experienced programmers who are relatively new to Python.  This guide does not pretend to be a replacement for the full [Python Tutorial](https://docs.python.org/3/tutorial/index.html).  This guide aims to provide value through a curated selection of important knowledge that helps an experienced programmer get started quickly.
@@ -131,7 +139,7 @@ The standard is 4 spaces per level.
 
 - Do not use tabs.
 - Python will raise an error if you mix tabs and spaces in the same file, and even if it doesn't, results may vary between editors or environments.
-- The [PEP 8 Style Guide for Python Code](https://peps.python.org/pep-0008/) recommends 4 spaces, and formatters commonly follow this
+- The [PEP 8 Style Guide for Python Code](https://peps.python.org/pep-0008/) recommends 4 spaces, and formatters commonly follow this.
 
 ### 2.3. Colons Start Blocks
 
@@ -326,7 +334,7 @@ Python doesn’t enforce access restrictions (`private`, `protected`, etc.). Ins
 
 ### 4.6. Modules And Packages
 
-- Module names (i.e., `.py` files) should use `snake_case`, all lowercase. Avoid dashes or capital letters.  Examples: `math_utils.py`, `my_script.py`
+- Module names (i.e., `.py` files) should use `snake_case`, all lowercase. Avoid dashes or capital letters.  Examples: `math_utils.py`, `my_script.py`.
 - Package names (i.e., folders containing modules) follow the same `snake_case` convention.
 
 The presence of a file named `__init__.py` (even if empty) tells Python to treat the directory as a package.
@@ -603,8 +611,8 @@ if n > 0:
 
 Assignment expressions are useful when:
 
-- You want to **avoid repeating a costly or verbose expression**
-- You need to **both capture a value and test it**
+- You want to **avoid repeating a costly or verbose expression**.
+- You need to **both capture a value and test it**.
 
 > Avoid overusing `:=`. It's best used when it improves clarity, not just to write fewer lines. For simple cases, regular assignment remains more readable.
 
@@ -614,7 +622,7 @@ The table below shows a simplified but complete view of operator precedence. Ope
 
 | Precedence (high → low)   | Category               | Operators & Examples                            |
 |---------------------------|------------------------|--------------------------------------------------|
-| 1                         | **Parentheses**        | `( ... )` — grouping, overrides precedence       |
+| 1                         | **Parentheses**        | `( ... )` &mdash; grouping, overrides precedence       |
 | 2                         | **Exponentiation**     | `**`                                             |
 | 3                         | **Unary**              | `+x`, `-x`, `~x`, `not x`                        |
 | 4                         | **Multiplicative**     | `*`, `/`, `//`, `%`                              |
@@ -635,7 +643,7 @@ The table below shows a simplified but complete view of operator precedence. Ope
 **Notes:**
 
 - All comparison, identity, and membership operators share the same precedence level but are grouped by purpose for clarity.
-- Parentheses always win — use them liberally to clarify intent.
+- Parentheses always win.  Use them liberally to clarify intent.
 - Logical operators (`not`, `and`, `or`) have relatively low precedence.
 - Bitwise and arithmetic operators follow precedence similar to C/C++.
 - The **walrus operator `:=`** binds even more loosely than `=`, meaning it’s safe to use in conditionals without surprises.
@@ -647,7 +655,7 @@ The table below shows a simplified but complete view of operator precedence. Ope
 ### 6.9. Summary
 
 - Arithmetic and comparison operators behave as expected.
-- Use `and`, `or`, and `not` — not `&&`, `||`, or `!`.
+- Use `and`, `or`, and `not` &mdash; not `&&`, `||`, or `!`.
 - Use `==` for value equality, `is` for object identity.
 - `True` and `False` are of type `bool`, which is a subclass of `int`.
 - Bitwise operators resemble other C-like languages.
@@ -657,7 +665,7 @@ The table below shows a simplified but complete view of operator precedence. Ope
 
 Python has four core built-in collection types: `list`, `tuple`, `set`, and `dict`. These are the backbone of most Python programs.
 
-> NOTE: This section covers the basics of using these data structures — enough to be productive and avoid surprises. Deeper topics (like comprehensions, unpacking, and iteration patterns) are covered later.
+> NOTE: This section covers the basics of using these data structures &mdash; enough to be productive and avoid surprises. Deeper topics (like comprehensions, unpacking, and iteration patterns) are covered later.
 
 ### 7.1. Lists
 
@@ -709,7 +717,7 @@ nums = {1, 2, 3}
 - Remove: `nums.remove(2)`
 - Set operations: union (`|`), intersection (`&`), difference (`-`)
 
-To make an empty set, use `set()` — `{}` creates an empty `dict`.
+To make an empty set, use `set()`.  `{}` creates an empty `dict`.
 
 ### 7.4. Dictionaries
 
@@ -736,7 +744,7 @@ Python uses `None` to represent the absence of a value.
 value = None
 ```
 
-- `None` is a singleton — only one instance exists
+- `None` is a singleton &mdash; only one instance exists
 - Compare using `is` or `is not` (not `==`)
 - Commonly used as:
   - Default values
@@ -750,3 +758,127 @@ value = None
 - Use `set` for unique unordered values.
 - Use `dict` for key-value mappings.
 - Use `None` to represent “no value”.
+
+## 8. Functions And Parameter Passing
+
+Functions in Python are defined using the `def` keyword. They support default arguments, keyword arguments, and flexible parameter unpacking.
+
+### 8.1. Defining A Function
+
+```python
+def greet(name):
+    print(f"Hello, {name}!")
+```
+
+- Functions use the `def` keyword and a colon to start a block.
+- Indentation defines the function body.
+- Functions return `None` by default if no `return` is given.
+
+### 8.2. Returning Values
+
+Use `return` to return a value:
+
+```python
+def square(x):
+    return x * x
+```
+
+### 8.3. Default Parameters
+
+You can provide default values:
+
+```python
+def greet(name, greeting="Hello"):
+    print(f"{greeting}, {name}!")
+```
+
+Default arguments are evaluated once when the function is defined, not each time it is called.
+
+⚠️ **Be careful with mutable defaults** (e.g., lists or dicts):
+
+```python
+def bad(x=[]):
+    x.append(1)
+    return x
+
+print(bad())  # [1]
+print(bad())  # [1, 1] — surprise!
+```
+
+Why this happens:  The default list is created once at definition time.  Each call to `bad()` that does not pass in arguments modifies this same list.
+
+Instead, use `None` and assign inside the function:
+
+```python
+def good(x=None):
+    if x is None:
+        x = []
+    x.append(1)
+    return x
+```
+
+### 8.4. Positional And Keyword Arguments
+
+This example refers back to the `greet` function of the previous section.  Arguments can be passed by position or keyword:
+
+```python
+greet("Alice", "Hi")                # positional
+greet(name="Alice", greeting="Hi")  # keyword
+greet(greeting="Hi", name="Alice")  # keyword order is flexible
+```
+
+- You can mix the two, but positional arguments must come first.
+- Once you use a keyword argument, all remaining arguments must also be keywords.
+- Keyword arguments can appear in any order.
+
+### 8.5. Arbitrary Arguments
+
+You can use `*args` and `**kwargs` to accept flexible arguments:
+
+```python
+def demo(*args, **kwargs):
+    print("Positional:", args)
+    print("Keyword:", kwargs)
+
+demo(1, 2, 3, a=10, b=20)
+```
+
+- `*args` is a tuple of extra positional args
+- `**kwargs` is a dict of extra keyword args
+
+### 8.6. Parameter Passing Model
+
+Python uses **pass-by-assignment** (a.k.a. “pass-by-object-reference”):
+
+- Arguments are passed as references to objects.
+- For **mutable objects**, changes inside the function **can affect** the original.
+- For **immutable objects**, reassignment inside the function **does not affect** the original.
+
+```python
+def mutate(lst):
+    lst.append(4)
+
+nums = [1, 2, 3]
+mutate(nums)
+print(nums)  # [1, 2, 3, 4]
+```
+
+```python
+def reassign(x):
+    x = 42
+
+a = 10
+reassign(a)
+print(a)  # 10 — unchanged
+```
+
+In Python, mutability is a property of the type.  Each built-in type is either mutable or immutable by design.  This cannot be controlled on a per-variable basis.
+
+### 8.7. Summary
+
+- Use `def` to define functions; they return `None` by default.
+- Use `return` to return a value.
+- Use default parameters with care.  Avoid mutable defaults.
+- Arguments can be passed by position or keyword.
+- Use `*args` and `**kwargs` for flexible parameters.
+- Python passes arguments by object reference; mutability determines if changes affect the caller.  Mutability is a property of the type.
