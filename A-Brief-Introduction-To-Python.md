@@ -47,21 +47,39 @@
     - [6.7. Assignment Expressions](#67-assignment-expressions)
     - [6.8. Operator Precedence](#68-operator-precedence)
     - [6.9. Summary](#69-summary)
-  - [7. Core Data Structures](#7-core-data-structures)
-    - [7.1. Lists](#71-lists)
-    - [7.2. Tuples](#72-tuples)
-    - [7.3. Sets](#73-sets)
-    - [7.4. Dictionaries](#74-dictionaries)
-    - [7.5. None](#75-none)
-    - [7.6. Summary](#76-summary)
-  - [8. Functions And Parameter Passing](#8-functions-and-parameter-passing)
-    - [8.1. Defining A Function](#81-defining-a-function)
-    - [8.2. Returning Values](#82-returning-values)
-    - [8.3. Default Parameters](#83-default-parameters)
-    - [8.4. Positional And Keyword Arguments](#84-positional-and-keyword-arguments)
-    - [8.5. Arbitrary Arguments](#85-arbitrary-arguments)
-    - [8.6. Parameter Passing Model](#86-parameter-passing-model)
-    - [8.7. Summary](#87-summary)
+  - [7. Built-In Types](#7-built-in-types)
+    - [7.1. Numeric Types](#71-numeric-types)
+    - [7.2. String And Binary Types](#72-string-and-binary-types)
+      - [7.2.1. String Type](#721-string-type)
+      - [7.2.2. Binary Types](#722-binary-types)
+    - [7.3. Sequence Types](#73-sequence-types)
+      - [7.3.1. list (mutable)](#731-list-mutable)
+      - [7.3.2. tuple (immutable)](#732-tuple-immutable)
+      - [7.3.3. range](#733-range)
+    - [7.4. Set Types](#74-set-types)
+      - [7.4.1. set (mutable)](#741-set-mutable)
+      - [7.4.2. frozenset (immutable)](#742-frozenset-immutable)
+    - [7.5. Mapping Types](#75-mapping-types)
+      - [7.5.1. dict](#751-dict)
+    - [7.6. Special Types](#76-special-types)
+      - [7.6.1. `NoneType` (`None`)](#761-`nonetype`-`none`)
+      - [7.6.2. `type` and `object`](#762-`type`-and-`object`)
+    - [7.7. Summary](#77-summary)
+  - [8. Core Data Structures](#8-core-data-structures)
+    - [8.1. Lists](#81-lists)
+    - [8.2. Tuples](#82-tuples)
+    - [8.3. Sets](#83-sets)
+    - [8.4. Dictionaries](#84-dictionaries)
+    - [8.5. None](#85-none)
+    - [8.6. Summary](#86-summary)
+  - [9. Functions And Parameter Passing](#9-functions-and-parameter-passing)
+    - [9.1. Defining A Function](#91-defining-a-function)
+    - [9.2. Returning Values](#92-returning-values)
+    - [9.3. Default Parameters](#93-default-parameters)
+    - [9.4. Positional And Keyword Arguments](#94-positional-and-keyword-arguments)
+    - [9.5. Arbitrary Arguments](#95-arbitrary-arguments)
+    - [9.6. Parameter Passing Model](#96-parameter-passing-model)
+    - [9.7. Summary](#97-summary)
 <!--END_TOC-->
 
 This is a quick introduction to Python for experienced programmers who are relatively new to Python.  This guide does not pretend to be a replacement for the full [Python Tutorial](https://docs.python.org/3/tutorial/index.html).  This guide aims to provide value through a curated selection of important knowledge that helps an experienced programmer get started quickly.
@@ -548,7 +566,7 @@ if a is not None and a > 0:
     ...
 ```
 
-(`None` is a singleton object that represents the absence of a value or a null value.  This is covered in greater depth in the section on [Core Data Structures](#7-core-data-structures).)
+(`None` is a singleton object that represents the absence of a value or a null value.  This is covered in greater depth in the section on [Core Data Structures](#8-core-data-structures).)
 
 ### 6.4. Identity Versus Equality
 
@@ -661,13 +679,312 @@ The table below shows a simplified but complete view of operator precedence. Ope
 - Bitwise operators resemble other C-like languages.
 - Operator precedence mostly follows C-like rules, but parentheses are preferred for clarity.
 
-## 7. Core Data Structures
+## 7. Built-In Types
+
+Everything in Python is an object, and every object has a type. This section provides a high-level survey of Python’s built-in types, organized by category: numeric types, string and binary types, sequences, sets, mappings, and special types.
+
+Built-in types is a huge topic.  For full details see [Python's article, Built-in Types](https://docs.python.org/3/library/stdtypes.html#).
+
+### 7.1. Numeric Types
+
+See also Python's documentation for [Numeric Types](https://docs.python.org/3/library/stdtypes.html#numeric-types-int-float-complex) and [Boolean Type](https://docs.python.org/3/library/stdtypes.html#boolean-type-bool).
+
+Python has four numeric types: `int`, `float`, `complex`, and `bool`.
+
+All numeric types are immutable.
+
+```python
+x = 42           # int
+y = 3.14         # float
+z = 2 + 3j       # complex
+flag = True      # bool (subclass of int)
+```
+
+`bool` is a subclass of `int`: `True == 1` and `False == 0`.
+
+Examples of type conversions:
+
+```python
+float(3)       # 3.0
+int(3.9)       # 3
+bool(0)        # False
+```
+
+### 7.2. String And Binary Types
+
+#### 7.2.1. String Type
+
+See also Python's documentation for the [`str` type, also known as Text Sequence Type](https://docs.python.org/3/library/stdtypes.html#text-sequence-type-str).
+
+Python has one string type, `str`, for storing an immutable sequence of Unicode characters.
+
+To create a string:
+
+```python
+s = "hello"
+```
+
+`str` is immutable, and it supports indexing, slicing, and iteration.
+
+```python
+s = "Python"
+print(s[0])     # "P"     — indexing
+print(s[-1])    # "n"     — negative indexing
+print(s[1:4])   # "yth"   — slicing from index 1 up to (but not including) 4
+print(s[:3])    # "Pyt"   — slice from start to index 3
+print(s[3:])    # "hon"   — slice from index 3 to end
+
+# iteration
+for char in s:
+    print(char)  # Each iteration yields a single-character string
+```
+
+Here are a few examples of calling a built-in function on a string:
+
+```python
+s = "hello"
+print(s.upper())          # "HELLO"
+print(s.capitalize())     # "Hello"
+print(s.endswith("llo"))  # True
+```
+
+For more, see Python's [String Methods](https://docs.python.org/3/library/stdtypes.html#string-methods).  Some other interesting things to do with strings are shown below.
+
+Membership testing:
+
+```python
+"py" in "python"  # True
+```
+
+Concatenation:
+
+```python
+"py" + "thon"  # "python"
+```
+
+Repetition:
+
+```python
+"ha" * 3  # "hahaha"
+```
+
+Formatting:
+
+```python
+greeting = "Hello"
+name = "Bob"
+punctuation = "!"
+print(f"{greeting} {name}{punctuation}")  # "Hello Bob!"
+```
+
+And so on.
+
+#### 7.2.2. Binary Types
+
+See also Python's documentation for [Binary Sequence Types](https://docs.python.org/3/library/stdtypes.html#binary-sequence-types-bytes-bytearray-memoryview).
+
+Python has two main types for working with binary data: `bytes` and `bytearray`.  Both represent sequences of bytes, but differ in mutability:
+
+- `bytes` is immutable.
+- `bytearray` is mutable.
+
+Note that `bytes` literals are prefixed with `b`, like `b"hello"`.
+
+```python
+b = b"hello"            # bytes (immutable)
+ba = bytearray(b)       # bytearray (mutable)
+```
+
+To create an empty instance:
+
+```python
+empty_bytes = bytes()
+empty_bytearray = bytearray()
+```
+
+You can also create them from lists of integers:
+
+```python
+raw = bytes([72, 101, 108, 108, 111])  # b'Hello'
+```
+
+You can index into either type:
+
+```python
+print(b[1])     # 101 — the ASCII code for 'e'
+print(ba[1])    # 101
+```
+
+With `bytearray`, you can modify contents:
+
+```python
+ba[0] = 72      # replace 'h' (104) with 'H' (72)
+print(ba)       # bytearray(b'Hello')
+```
+
+Like strings, both `bytes` and `bytearray` support slicing and iteration:
+
+```python
+for b in b"abc":
+    print(b)  # prints 97, 98, 99 (ASCII codes)
+print(b"abcdef"[1:4])  # b"bcd"
+```
+
+Tip: Iterating over binary types yields integers (byte values 0-255) not characters.
+
+Binary types are useful when:
+
+- Reading or writing binary files
+- Processing network packets or byte-oriented protocols
+- Performing low-level manipulations or encodings (e.g., UTF-8, Base64)
+
+### 7.3. Sequence Types
+
+Python has several sequence types: `list`, `tuple`, `range`, `str`, and `bytes`.
+
+#### 7.3.1. List (mutable)
+
+See also Python's documentation for ...
+
+Lists are ordered, mutable sequences.
+
+```python
+fruits = ["apple", "banana", "cherry"]
+```
+
+- Indexable: `fruits[0] == "apple"`
+- Mutable: `fruits[1] = "blueberry"`
+- Append: `fruits.append("date")`
+- Remove: `fruits.remove("banana")`
+- Length: `len(fruits)`
+- Lists can contain any type, including other lists.
+
+#### 7.3.2. Tuple (immutable)
+
+Tuples are ordered, immutable sequences.
+
+```python
+point = (3, 4)
+```
+
+- Indexable: `point[0] == 3`
+- Immutable: cannot reassign `point[1]`
+- Often used for fixed-length groupings
+- Parentheses are optional in many contexts: `x, y = 1, 2` defines a tuple
+- Single-element tuples require a trailing comma:
+  ```python
+  one = (42,)      # tuple
+  not_a_tuple = (42)  # just an int
+  ```
+
+#### 7.3.3. range
+
+Used for iteration over a sequence of numbers.
+
+```python
+for i in range(5):
+    print(i)  # 0 through 4
+```
+
+Efficient: doesn’t store the full sequence in memory.
+
+---
+
+### 7.4. Set Types
+
+Sets are unordered collections of unique elements.
+
+#### 7.4.1. set (mutable)
+
+```python
+nums = {1, 2, 3}
+nums.add(4)
+nums.remove(2)
+```
+
+- No duplicates: `{1, 2, 2}` becomes `{1, 2}`
+- Unordered: no index access
+- Membership: `3 in nums`
+- Set operations: union (`|`), intersection (`&`), difference (`-`)
+
+To create an empty set, use `set()`. `{}` creates an empty `dict`.
+
+#### 7.4.2. frozenset (immutable)
+
+```python
+f = frozenset([1, 2, 3])
+```
+
+Same behavior as `set`, but immutable.
+
+---
+
+### 7.5. Mapping Types
+
+#### 7.5.1. dict
+
+Dictionaries store key-value pairs.
+
+```python
+scores = {"Alice": 90, "Bob": 85}
+scores["Charlie"] = 88
+```
+
+- Keys must be hashable (e.g., strings, numbers, tuples)
+- Values can be anything
+- Access: `scores["Alice"]`
+- Add/update: `scores["Dave"] = 95`
+- Remove: `del scores["Bob"]`
+- Safe lookup: `scores.get("Eve", 0)`
+- Iteration:
+  ```python
+  for name, score in scores.items():
+      print(name, score)
+  ```
+
+---
+
+### 7.6. Special Types
+
+#### 7.6.1. `NoneType` (`None`)
+
+Represents the absence of a value.
+
+```python
+x = None
+if x is None:
+    ...
+```
+
+#### 7.6.2. `type` and `object`
+
+- `type(x)` returns the type of `x`
+- `object` is the base class of all types
+
+---
+
+### 7.7. Summary
+
+| Category       | Types                            |
+|----------------|----------------------------------|
+| Numeric        | `int`, `float`, `complex`, `bool` |
+| Text/Binary    | `str`, `bytes`, `bytearray`      |
+| Sequence       | `list`, `tuple`, `range`, `str`  |
+| Set            | `set`, `frozenset`               |
+| Mapping        | `dict`                           |
+| Special        | `None`, `type`, `object`         |
+
+- Some types are **mutable** (`list`, `dict`, `set`, `bytearray`)
+- Others are **immutable** (`int`, `float`, `str`, `tuple`, `bytes`, `frozenset`)
+- Use `type(x)` or `isinstance(x, type)` to check an object’s type
+
+## 8. Core Data Structures
 
 Python has four core built-in collection types: `list`, `tuple`, `set`, and `dict`. These are the backbone of most Python programs.
 
 > NOTE: This section covers the basics of using these data structures &mdash; enough to be productive and avoid surprises. Deeper topics (like comprehensions, unpacking, and iteration patterns) are covered later.
 
-### 7.1. Lists
+### 8.1. Lists
 
 Lists are ordered, mutable sequences.
 
@@ -683,7 +1000,7 @@ fruits = ["apple", "banana", "cherry"]
 
 Lists can contain any type, including other lists.
 
-### 7.2. Tuples
+### 8.2. Tuples
 
 Tuples are ordered, immutable sequences.
 
@@ -703,7 +1020,7 @@ one = (42,)  # this is a tuple
 not_a_tuple = (42)  # just an int
 ```
 
-### 7.3. Sets
+### 8.3. Sets
 
 Sets are unordered collections of unique values.
 
@@ -719,7 +1036,7 @@ nums = {1, 2, 3}
 
 To make an empty set, use `set()`.  `{}` creates an empty `dict`.
 
-### 7.4. Dictionaries
+### 8.4. Dictionaries
 
 Dictionaries (or “dicts”) map keys to values.
 
@@ -736,7 +1053,7 @@ scores = {"Alice": 90, "Bob": 85}
 
 Use `{}` to define a dict. To define an empty dict, use `{}` or `dict()`.
 
-### 7.5. None
+### 8.5. None
 
 Python uses `None` to represent the absence of a value.
 
@@ -751,7 +1068,7 @@ value = None
   - Function return when there’s nothing else to return
   - Sentinel values
 
-### 7.6. Summary
+### 8.6. Summary
 
 - Use `list` for general-purpose, ordered, mutable sequences.
 - Use `tuple` for fixed-length, immutable groupings.
@@ -759,11 +1076,11 @@ value = None
 - Use `dict` for key-value mappings.
 - Use `None` to represent “no value”.
 
-## 8. Functions And Parameter Passing
+## 9. Functions And Parameter Passing
 
 Functions in Python are defined using the `def` keyword. They support default arguments, keyword arguments, and flexible parameter unpacking.
 
-### 8.1. Defining A Function
+### 9.1. Defining A Function
 
 ```python
 def greet(name):
@@ -774,7 +1091,7 @@ def greet(name):
 - Indentation defines the function body.
 - Functions return `None` by default if no `return` is given.
 
-### 8.2. Returning Values
+### 9.2. Returning Values
 
 Use `return` to return a value:
 
@@ -783,7 +1100,7 @@ def square(x):
     return x * x
 ```
 
-### 8.3. Default Parameters
+### 9.3. Default Parameters
 
 You can provide default values:
 
@@ -817,7 +1134,7 @@ def good(x=None):
     return x
 ```
 
-### 8.4. Positional And Keyword Arguments
+### 9.4. Positional And Keyword Arguments
 
 This example refers back to the `greet` function of the previous section.  Arguments can be passed by position or keyword:
 
@@ -831,7 +1148,7 @@ greet(greeting="Hi", name="Alice")  # keyword order is flexible
 - Once you use a keyword argument, all remaining arguments must also be keywords.
 - Keyword arguments can appear in any order.
 
-### 8.5. Arbitrary Arguments
+### 9.5. Arbitrary Arguments
 
 You can use `*args` and `**kwargs` to accept flexible arguments:
 
@@ -846,7 +1163,7 @@ demo(1, 2, 3, a=10, b=20)
 - `*args` is a tuple of extra positional args
 - `**kwargs` is a dict of extra keyword args
 
-### 8.6. Parameter Passing Model
+### 9.6. Parameter Passing Model
 
 Python uses **pass-by-assignment** (a.k.a. “pass-by-object-reference”):
 
@@ -874,7 +1191,7 @@ print(a)  # 10 — unchanged
 
 In Python, mutability is a property of the type.  Each built-in type is either mutable or immutable by design.  This cannot be controlled on a per-variable basis.
 
-### 8.7. Summary
+### 9.7. Summary
 
 - Use `def` to define functions; they return `None` by default.
 - Use `return` to return a value.
