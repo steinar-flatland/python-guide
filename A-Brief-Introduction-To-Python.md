@@ -1392,6 +1392,118 @@ for i, name in enumerate(names):
 
 ### 8.5. str
 
+The `str` type represents a sequence of Unicode characters. Strings are immutable.
+
+Strings are created using single or double quotes:
+
+```python
+s1 = "hello"
+s2 = 'world'
+```
+
+Multi-line strings can use triple quotes:
+
+```python
+s3 = """This is
+a multiline
+string."""
+```
+
+Strings support indexing, slicing, and iteration:
+
+```python
+text = "Python"
+
+print(text[0])     # P — first character
+print(text[-1])    # n — last character
+print(text[1:4])   # yth — slice from index 1 up to (but not including) 4
+
+for ch in text:
+    print(ch)
+```
+
+Strings are immutable:
+
+```python
+# text[0] = "J"     # TypeError: 'str' object does not support item assignment
+```
+
+Concatenation and repetition:
+
+```python
+greeting = "Hi, "
+name = "Alice"
+print(greeting + name)     # "Hi, Alice"
+print("ha" * 3)            # "hahaha"
+```
+
+Membership testing:
+
+```python
+print("py" in "python")    # True
+print("z" not in "python") # True
+```
+
+Length:
+
+```python
+print(len("hello"))        # 5
+```
+
+Strings support a large number of [methods](https://docs.python.org/3/library/stdtypes.html#string-methods). A few examples:
+
+```python
+s = "  hello, world!  "
+
+print(s.strip())                     # "hello, world!" — remove surrounding whitespace
+print(s.upper())                     # "  HELLO, WORLD!  "
+print(s.replace("world", "Python"))  # "  hello, Python!  "
+print(s.startswith("  he"))          # True
+print(s.endswith("!  "))             # True
+```
+
+Splitting and joining:
+
+```python
+csv = "red,green,blue"
+colors = csv.split(",")
+print(colors)                       # ['red', 'green', 'blue']
+
+joined = "-".join(colors)
+print(joined)                       # "red-green-blue"
+```
+
+Formatted strings:
+
+```python
+name = "Bob"
+age = 30
+print(f"{name} is {age} years old.")  # "Bob is 30 years old."
+```
+
+Strings can also be encoded into bytes:
+
+```python
+s = "café"
+b = s.encode("utf-8")
+print(b)           # b'caf\xc3\xa9'
+```
+
+To decode bytes back into a string:
+
+```python
+decoded = b.decode("utf-8")
+print(decoded)     # "café"
+```
+
+> 💡 When reading and writing files or handling network data, encoding and decoding strings is important.
+
+To view all available string methods:
+
+```python
+help(str)
+```
+
 ### 8.6. Binary Sequence Types
 
 #### 8.6.1. bytes
