@@ -1506,7 +1506,66 @@ help(str)
 
 ### 8.6. Binary Sequence Types
 
+As stated in the official Python documentation for [Binary Sequence Types](https://docs.python.org/3/library/stdtypes.html#binary-sequence-types-bytes-bytearray-memoryview):
+
+> The core built-in types for manipulating binary data are `bytes` and `bytearray`. They are supported by `memoryview` which uses the buffer protocol to access the memory of other binary objects without needing to make a copy.
+
+These types represent sequences of bytes &mdash; integers in the range 0–255 &mdash; and are used for working with raw binary data such as file contents, network packets, or low-level protocol buffers. While `bytes` is immutable and behaves similarly to a `str`, `bytearray` is mutable. `memoryview` provides a zero-copy way to work with buffers exposed by other binary-compatible objects.
+
 #### 8.6.1. bytes
+
+The `bytes` type represents an immutable sequence of bytes (integers in the range 0–255). It is commonly used for handling raw binary data, such as file contents or network messages.
+
+You can define a `bytes` object using a `b` prefix before a string literal:
+
+```python
+b = b"hello"
+print(b)             # b'hello'
+```
+
+Each byte is represented by an integer (0–255). You can index and slice `bytes` just like other sequences:
+
+```python
+print(b[0])          # 104 — ASCII code for 'h'
+print(b[1:4])        # b'ell'
+```
+
+You can also iterate over `bytes` to get individual byte values:
+
+```python
+for byte in b:
+    print(byte, end=" ")  # 104 101 108 108 111
+print()
+```
+
+To construct a `bytes` object from a list of integers:
+
+```python
+data = bytes([72, 101, 108, 108, 111])
+print(data)          # b'Hello'
+```
+
+The `bytes` type supports many of the same methods as `str`, especially ones useful for binary-safe processing:
+
+```python
+print(b.upper())              # b'HELLO'
+print(b.find(b"ell"))         # 1
+print(b.replace(b"l", b"x"))  # b'hexxo'
+```
+
+Since `bytes` is immutable, any operation that modifies its contents produces a new `bytes` object.
+
+Example of encoding and decoding between `str` and `bytes`:
+
+```python
+s = "hello"
+encoded = s.encode("utf-8")        # to bytes
+decoded = encoded.decode("utf-8")  # back to string
+print(encoded)                     # b'hello'
+print(decoded)                     # 'hello'
+```
+
+Use `bytes` when working with binary files, protocols, or external data that is not inherently textual.
 
 #### 8.6.2. bytearray
 
