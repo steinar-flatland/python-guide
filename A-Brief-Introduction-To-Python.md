@@ -1569,6 +1569,59 @@ Use `bytes` when working with binary files, protocols, or external data that is 
 
 #### 8.6.2. bytearray
 
+The `bytearray` type represents a mutable sequence of bytes (integers in the range 0–255). It behaves similarly to `bytes`, but allows in-place modification of its contents.
+
+To create a `bytearray`:
+
+```python
+ba = bytearray([65, 66, 67])
+print(ba)               # bytearray(b'ABC')
+```
+
+You can also convert a `bytes` object to `bytearray`:
+
+```python
+b = b"hello"
+ba = bytearray(b)
+print(ba)               # bytearray(b'hello')
+```
+
+Like other sequences, `bytearray` supports indexing, slicing, and iteration:
+
+```python
+print(ba[1])            # 101 — ASCII for 'e'
+ba[1] = 120             # Replace 'e' with 'x' (ASCII 120)
+print(ba)               # bytearray(b'hxllo')
+print(ba[1:4])          # bytearray(b'xll')
+```
+
+Appending and extending:
+
+```python
+ba.append(33)           # Add '!' (ASCII 33) to the end
+print(ba)               # bytearray(b'hxllo!')
+ba.extend([32, 87])     # Add space and 'W'
+print(ba)               # bytearray(b'hxllo! W')
+```
+
+Remove or insert:
+
+```python
+del ba[0]               # Remove first byte
+print(ba)               # bytearray(b'xllo! W')
+ba.insert(0, 72)        # Insert 'H' (ASCII 72) at index 0
+print(ba)               # bytearray(b'Hxllo! W')
+```
+
+Convert back to `bytes` if needed:
+
+```python
+b2 = bytes(ba)
+print(b2)               # b'Hxllo! W'
+```
+
+`bytearray` is commonly used for working with mutable binary data, especially when performance is important or you need to modify the contents in place.
+
 #### 8.6.3. memoryview
 
 ### 8.7. Set Types
