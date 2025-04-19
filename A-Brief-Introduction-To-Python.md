@@ -1155,16 +1155,240 @@ This table summarizes the built-in sequence types, their mutability, and notes a
 
 The three basic sequence types are `list`, `tuple`, and `range`.
 
-Additionally:
-
-- The string type (`str`) is considered a sequence type.  It is covered in its own section.  See: [str](#85-str).
-- There are also a few sequence types for dealing with binary data.  See the section on [Binary Sequence Types](#86-binary-sequence-types).
-
 #### 8.4.1. list
+
+The `list` type is Python’s most commonly used built-in sequence. It is ordered, mutable, and heterogeneous &mdash; it can contain elements of different types.
+
+Lists are defined using square brackets:
+
+```python
+fruits = ["apple", "banana", "cherry"]
+```
+
+Common list operations:
+
+```python
+fruits = ["apple", "banana", "cherry"]
+
+print(fruits[0])                 # apple — indexing
+print(fruits[-1])                # cherry — negative indexing
+print(fruits[1:])                # ['banana', 'cherry'] — from index 1 to end
+
+fruits.append("date")            # Add to end
+print(fruits)                    # ['apple', 'banana', 'cherry', 'date']
+
+fruits[1] = "blueberry"          # Mutate by assignment
+print(fruits)                    # ['apple', 'blueberry', 'cherry', 'date']
+
+fruits[0:2] = ["kiwi", "mango"]  # Mutate by slice assignment
+print(fruits)                    # ['kiwi', 'mango', 'cherry', 'date']
+
+del fruits[2]                    # Remove by index
+print(fruits)                    # ['kiwi', 'mango', 'date']
+
+fruits.remove("kiwi")            # Remove by value
+print(fruits)                    # ['mango', 'date']
+
+print(len(fruits))               # 2 — list length
+```
+
+Iteration and membership:
+
+```python
+for fruit in fruits:
+    print(fruit)
+
+if "date" in fruits:
+    print("Yes, we have dates.")
+```
+
+Lists are not restricted to a single data type:
+
+```python
+mixed = [1, "two", 3.0, [4, 5], {"six": 6}]
+print(mixed[3])        # [4, 5] — a nested list
+```
+
+List comprehensions provide a concise way to create new lists:
+
+```python
+squares = [x * x for x in range(5)]
+print(squares)         # [0, 1, 4, 9, 16]
+```
+
+You can add conditions in a list comprehension:
+
+```python
+evens = [x for x in range(10) if x % 2 == 0]
+print(evens)           # [0, 2, 4, 6, 8]
+```
+
+> 💡 For large lists or complex transformations, list comprehensions often replace manual loops.
+
+Assigning a list to a new variable creates a reference, not a copy:
+
+```python
+a = [1, 2, 3]
+b = a
+b.append(4)
+print(a)               # [1, 2, 3, 4] — same object as `b`
+```
+
+To copy:
+
+```python
+b = a.copy()           # or: b = list(a) or b = a[:]
+```
+
+Note that `copy()` produces a shallow copy:
+
+```python
+nested = [[1], [2]]
+copy = nested.copy()
+copy[0][0] = 99
+print(nested)           # [[99], [2]] — inner lists are shared
+```
+
+Example of a deep copy:
+
+```python
+import copy
+nested = [[1], [2]]
+copy = copy.deepcopy(nested)
+copy[0][0] = 99
+print(nested)  # [[1], [2]]   # original unaltered
+print(copy)    # [[99], [2]]  # deep copy was modified
+```
 
 #### 8.4.2. tuple
 
+The `tuple` type is an immutable sequence. Tuples are often used to group related values together, especially when their structure is fixed.
+
+Tuples are defined using parentheses:
+
+```python
+point = (3, 4)
+```
+
+You can also omit the parentheses when defining a tuple:
+
+```python
+color = "red", 255, 0
+print(color)  # ('red', 255, 0)
+```
+
+A single-element tuple requires a trailing comma:
+
+```python
+singleton = (42,)
+print(type(singleton))  # <class 'tuple'>
+```
+
+Indexing and slicing work like with lists:
+
+```python
+numbers = (10, 20, 30, 40)
+
+print(numbers[1])     # 20
+print(numbers[-1])    # 40
+print(numbers[1:3])   # (20, 30)
+```
+
+Tuples support iteration and membership testing:
+
+```python
+for n in numbers:
+    print(n)
+
+if 30 in numbers:
+    print("Found 30")
+```
+
+Tuples can contain any types, including other tuples or lists:
+
+```python
+mixed = (1, "two", [3, 4], (5, 6))
+print(mixed[2])  # [3, 4]
+```
+
+Although tuples are immutable, if they contain mutable elements, those elements can still be modified:
+
+```python
+t = ([1, 2], 3)
+t[0].append(99)
+print(t)  # ([1, 2, 99], 3)
+```
+
+Tuples are commonly used to return multiple values from functions:
+
+```python
+def divide(x, y):
+    return x // y, x % y
+
+quotient, remainder = divide(7, 3)
+print(quotient, remainder)  # 2 1
+```
+
+You can unpack tuples directly:
+
+```python
+name, age, city = ("Alice", 30, "NYC")
+print(city)  # NYC
+```
+
+> 💡 Tip: Use tuples when the structure of the data is fixed, and you want to prevent accidental modification.
+
 #### 8.4.3. range
+
+The `range` type represents an immutable sequence of integers. It's most commonly used for looping a specific number of times or generating integer sequences efficiently.
+
+A `range` object doesn't store all numbers in memory. Instead, it computes items on demand, making it memory-efficient even for large ranges.
+
+```python
+r = range(5)
+print(r)               # range(0, 5)
+print(list(r))         # [0, 1, 2, 3, 4]
+```
+
+You can create ranges with one, two, or three arguments:
+
+```python
+print(list(range(5)))           # [0, 1, 2, 3, 4]
+print(list(range(2, 6)))        # [2, 3, 4, 5]
+print(list(range(2, 10, 2)))    # [2, 4, 6, 8]
+print(list(range(10, 2, -2)))   # [10, 8, 6, 4]
+```
+
+Ranges support indexing, slicing, membership tests, and iteration:
+
+```python
+r = range(10)
+print(r[2])           # 2 — indexing
+print(r[-1])          # 9 — negative indexing
+print(r[2:5])         # range(2, 5) — slicing returns another range
+print(5 in r)         # True — membership test
+
+for i in r:
+    print(i, end=" ")  # 0 1 2 3 4 5 6 7 8 9 — iteration
+print()
+```
+
+Ranges are useful for indexing and enumeration:
+
+```python
+names = ["Alice", "Bob", "Charlie"]
+for i in range(len(names)):
+    print(i, names[i])
+```
+
+Or more Pythonically, use `enumerate()`:
+
+```python
+for i, name in enumerate(names):
+    print(i, name)
+```
+
+> 💡 `range` objects behave like read-only sequences. You can index, slice, and iterate over them, but you can't change them in place.
 
 ### 8.5. str
 
