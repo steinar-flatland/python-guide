@@ -738,9 +738,7 @@ The following built-in types are **immutable**:
 
 The `memoryview` type can be either mutable or immutable, depending upon how it was instantiated.
 
-> 💡 **Mutability Of User-Defined Classes**
->
-> Most user-defined classes in Python are _mutable_ by default.  Unless you explicitly design your class to prevent modification, its instances can typically have attributes added, removed, or updated.  To enforce immutability, you can override `__setattr__`, use `__slots__`, or apply a decorator like `@dataclass(frozen=True)` from the `dataclasses` module.
+> 💡 **Mutability Of User-Defined Classes**:  Most user-defined classes in Python are _mutable_ by default.  Unless you explicitly design your class to prevent modification, its instances can typically have attributes added, removed, or updated.  To enforce immutability, you can override `__setattr__`, use `__slots__`, or apply a decorator like `@dataclass(frozen=True)` from the `dataclasses` module.
 
 This section references numerous Python built-in types.  For more details, see the next section on [Types](#8-types).
 
@@ -1336,7 +1334,7 @@ name, age, city = ("Alice", 30, "NYC")
 print(city)  # NYC
 ```
 
-> 💡 Tip: Use tuples when the structure of the data is fixed, and you want to prevent accidental modification.
+> 💡 **Tip:** Use tuples when the structure of the data is fixed, and you want to prevent accidental modification.
 
 #### 8.4.3. range
 
@@ -1508,7 +1506,7 @@ help(str)
 
 As stated in the official Python documentation for [Binary Sequence Types](https://docs.python.org/3/library/stdtypes.html#binary-sequence-types-bytes-bytearray-memoryview):
 
-> The core built-in types for manipulating binary data are `bytes` and `bytearray`. They are supported by `memoryview` which uses the buffer protocol to access the memory of other binary objects without needing to make a copy.
+> The core built-in types for manipulating binary data are `bytes` and `bytearray`. They are supported by `memoryview` which uses the [buffer protocol](https://docs.python.org/3/c-api/buffer.html) to access the memory of other binary objects without needing to make a copy.
 
 These types represent sequences of bytes &mdash; integers in the range 0–255 &mdash; and are used for working with raw binary data such as file contents, network packets, or low-level protocol buffers. While `bytes` is immutable and behaves similarly to a `str`, `bytearray` is mutable. `memoryview` provides a zero-copy way to work with buffers exposed by other binary-compatible objects.
 
@@ -1624,11 +1622,183 @@ print(b2)               # b'Hxllo! W'
 
 #### 8.6.3. memoryview
 
+The `memoryview` type provides a way to access the memory of another binary object without copying it. This is especially useful for efficient slicing, manipulation, and I/O operations on large binary data.
+
+You can create a `memoryview` from any object that supports the [buffer protocol](https://docs.python.org/3/c-api/buffer.html), such as `bytes`, `bytearray`, and `array.array`.
+
+```python
+data = bytearray(b"hello")
+view = memoryview(data)
+```
+
+A `memoryview` behaves like a sequence of bytes:
+
+```python
+print(view[0])           # 104 — ASCII for 'h'
+print(view[1:4])         # <memory at 0x...>
+print(bytes(view[1:4]))  # b'ell'
+```
+
+Mutating the `memoryview` mutates the underlying object (if it's mutable):
+
+```python
+view[0] = 72             # Replace 'h' (104) with 'H' (72)
+print(data)              # bytearray(b'Hello')
+```
+
+You can use slicing and assignment just like a mutable sequence:
+
+```python
+view[1:3] = b"EY"
+print(data)              # bytearray(b'HEYlo')
+```
+
+You can also create multi-dimensional `memoryviews` from structured data like arrays (e.g., from `array.array`, [NumPy arrays](https://numpy.org/doc/stable/reference/generated/numpy.array.html), or binary files). These use `.cast()` to reshape the view:
+
+```python
+import array
+
+# Create an array of unsigned short integers (2 bytes each)
+a = array.array("H", [1000, 2000, 3000])  
+
+# Create a memoryview of the array (interprets values as unsigned shorts)
+m = memoryview(a)
+print(m.tolist())        # [1000, 2000, 3000] — each item is a 2-byte integer
+
+# Cast the memoryview to bytes (reinterpret each element as a single byte)
+m_cast = m.cast("B")     # create a new memoryview backed by same array a
+print(type(m_cast))      # <class 'memoryview'>
+print(m_cast.tolist())   # [232, 3, 208, 7, 184, 11] — raw bytes in little-endian order
+```
+
+> 🔒**Mutability Depends On The Source**: A `memoryview` created from a mutable object like `bytearray` or `array.array` allows modifications to the underlying data.  A `memoryview` created from an immutable object like `bytes` or `string` will be read-only, and attempts to modify it will raise a `TypeError`.
+
+Attempting to mutate a `memoryview` that is backed by immutable data causes a `TypeError`:
+
+```python
+m = memoryview(b"hello")   # from immutable bytes
+print(m.readonly)          # True
+m[0] = 72                  # TypeError: cannot modify read-only memory
+```
+
+> 💡 Use `memoryview` when performance matters, especially for large data structures or low-level binary manipulations.
+
 ### 8.7. Set Types
+
+Sets are useful when you need to eliminate duplicates, perform membership tests, or do mathematical set operations like union and intersection.
+
+There are two built-in set types:  `set` (mutable) and `frozenset` (immutable).
 
 #### 8.7.1. set
 
+The `set` type represents a mutable, unordered collection of unique elements.
+
+You can create a set using curly braces `{}` or the `set()` constructor:
+
+```python
+primes = {2, 3, 5, 7}
+print(primes)         # {2, 3, 5, 7}
+
+evens = set([2, 4, 6, 8])
+print(evens)          # {8, 2, 4, 6} — order is not preserved
+```
+
+Sets automatically eliminate duplicates:
+
+```python
+nums = {1, 2, 2, 3, 3, 3}
+print(nums)           # {1, 2, 3}
+```
+
+Membership testing is fast:
+
+```python
+if 5 in primes:
+    print("5 is prime")
+```
+
+Sets are mutable — you can add or remove elements:
+
+```python
+primes.add(11)
+primes.remove(3)
+print(primes)         # {2, 5, 7, 11}
+```
+
+Use `discard()` if you want to remove an item without raising an error if it’s missing:
+
+```python
+primes.discard(100)   # OK even if 100 isn't in the set
+```
+
+Set operations:
+
+```python
+a = {1, 2, 3}
+b = {3, 4, 5}
+
+print(a | b)   # {1, 2, 3, 4, 5} — union
+print(a & b)   # {3}             — intersection
+print(a - b)   # {1, 2}          — difference
+print(a ^ b)   # {1, 2, 4, 5}    — symmetric difference (analogous to xor)
+```
+
+Other useful methods:
+
+```python
+print(len(a))          # 3
+print(2 in a)          # True
+a.clear()              # Removes all elements
+print(a)               # set()
+```
+
+> 💡 Sets do not preserve insertion order (in versions before Python 3.7), and they cannot contain mutable or unhashable elements like lists or other sets.
+
+Attempting to include a list in a set results in a `TypeError`:
+
+```python
+# set_with_list = {1, [2, 3]}  # TypeError: unhashable type: 'list'
+```
+
+> 🔒 The elements of a set must be **hashable** — this means they must be immutable and implement a `__hash__()` method.
+
 #### 8.7.2. frozenset
+
+A `frozenset` is an immutable version of a `set`. Like the `set` type, `frozenset` contains only unique, unordered, hashable elements, but once created, its contents cannot be changed.
+
+You can create a `frozenset` using the built-in constructor:
+
+```python
+fs = frozenset([1, 2, 3, 2])
+print(fs)             # frozenset({1, 2, 3})
+```
+
+sSince `frozenset` is immutable, it does not support methods like `.add()`, `.remove()`, or item assignment. Attempting to mutate it raises an error:
+
+```python
+# fs.add(4)           # AttributeError: 'frozenset' object has no attribute 'add'
+```
+
+But you can perform all read-only set operations:
+
+```python
+a = frozenset([1, 2, 3])
+b = frozenset([3, 4, 5])
+
+print(a | b)    # frozenset({1, 2, 3, 4, 5}) — union
+print(a & b)    # frozenset({3})             — intersection
+print(a - b)    # frozenset({1, 2})          — difference
+print(a ^ b)    # frozenset({1, 2, 4, 5})    — symmetric difference (analogous to xor)
+```
+
+Since `frozenset` is immutable, it is also hashable and can be used as a key in a `dict`, or as an element in another `set`:
+
+```python
+d = {frozenset([1, 2]): "pair"}
+print(d[frozenset([1, 2])])  # "pair"
+```
+
+> 🔒 Use `frozenset` when you need a set that can safely be used in hashed collections or shared across code without being modified.
 
 ### 8.8. dict
 
