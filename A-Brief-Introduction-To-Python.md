@@ -1070,23 +1070,20 @@ print(True + True)   # 2 (discouraged style — shown for demonstration only)
 
 ## 9. Other Built-In Types
 
-To keep this introductory guide brief, certain Python built-in types are out of scope.  See also Python's full article on [Built-in Types](https://docs.python.org/3/library/stdtypes.htm) which covers, in addition to the types mentioned above, additional topics including:
+To keep this guide brief and focused, certain built-in types are out of scope. Python's full article on [Built-in Types](https://docs.python.org/3/library/stdtypes.html) covers many additional topics, including:
 
-- generators (iterators)
-- context management to control setup/teardown of resources using the `with` statement
-- type annotations that help tools like linters and IDEs understand code
-- introspective types such as modules, classes, functions and methods
-- code objects for python code as data
-- internal objects like stack frames
-- the Ellipsis object
-- the NotImplemented object
-- etc.
+- Generators and iterators  
+- Context managers (used with the `with` statement to manage resources)
+- Type annotations for better static analysis and editor support
+- Introspective types: modules, classes, functions, and methods
+- Code objects (representing Python code as data)
+- Internal objects like stack frames and traceback objects
+- Special singleton values like:
+  - `Ellipsis` (`...`)
+  - `NotImplemented`
+- And more
 
-## 10. Summary
-
-- Python is a dynamically typed language.
-
-Python types is a large topic.  For full details see Python's article, [Built-in Types](https://docs.python.org/3/library/stdtypes.html#).
+> This guide focused on the core built-in types you'll encounter in day-to-day Python programming. If you're curious to dig deeper, the [Built-in Types](https://docs.python.org/3/library/stdtypes.html) section of the Python docs is an excellent next step.
 
 ---------------------------------
 ---------------------------------
