@@ -51,55 +51,60 @@
       - [8.1.2. float](#812-float)
       - [8.1.3. complex](#813-complex)
     - [8.2. bool](#82-bool)
-    - [8.3. Basic Sequence Types](#83-basic-sequence-types)
-      - [8.3.1. list](#831-list)
-      - [8.3.2. tuple](#832-tuple)
-      - [8.3.3. range](#833-range)
-    - [8.4. str](#84-str)
-    - [8.5. Binary Sequence Types](#85-binary-sequence-types)
-      - [8.5.1. bytes](#851-bytes)
-      - [8.5.2. bytearray](#852-bytearray)
-      - [8.5.3. memoryview](#853-memoryview)
-    - [8.6. Set Types](#86-set-types)
-      - [8.6.1. set](#861-set)
-      - [8.6.2. frozenset](#862-frozenset)
-    - [8.7. dict](#87-dict)
-    - [8.8. Types About Types](#88-types-about-types)
-      - [8.8.1. NoneType](#881-nonetype)
-      - [8.8.2. type](#882-type)
+    - [8.3. General Information About Sequences](#83-general-information-about-sequences)
+      - [8.3.1. What Is A Sequence?](#831-what-is-a-sequence)
+      - [8.3.2. Common Sequence Operations](#832-common-sequence-operations)
+      - [8.3.3. Immutable Sequence Operations](#833-immutable-sequence-operations)
+      - [8.3.4. Mutable Sequence Operations](#834-mutable-sequence-operations)
+      - [8.3.5. Built-In Sequence Summary](#835-built-in-sequence-summary)
+    - [8.4. Basic Sequence Types](#84-basic-sequence-types)
+      - [8.4.1. list](#841-list)
+      - [8.4.2. tuple](#842-tuple)
+      - [8.4.3. range](#843-range)
+    - [8.5. str](#85-str)
+    - [8.6. Binary Sequence Types](#86-binary-sequence-types)
+      - [8.6.1. bytes](#861-bytes)
+      - [8.6.2. bytearray](#862-bytearray)
+      - [8.6.3. memoryview](#863-memoryview)
+    - [8.7. Set Types](#87-set-types)
+      - [8.7.1. set](#871-set)
+      - [8.7.2. frozenset](#872-frozenset)
+    - [8.8. dict](#88-dict)
+    - [8.9. Types About Types](#89-types-about-types)
+      - [8.9.1. NoneType](#891-nonetype)
+      - [8.9.2. type](#892-type)
   - [9. Other Built-In Types](#9-other-built-in-types)
-  - [10. Summary](#10-summary)
-    - [10.1. String And Binary Types](#101-string-and-binary-types)
-      - [10.1.1. String Type](#1011-string-type)
-      - [10.1.2. Binary Types](#1012-binary-types)
-    - [10.2. Sequence Types](#102-sequence-types)
-      - [10.2.1. List (mutable)](#1021-list-mutable)
-      - [10.2.2. Tuple (immutable)](#1022-tuple-immutable)
-      - [10.2.3. range](#1023-range)
-    - [10.3. Set Types](#103-set-types)
-      - [10.3.1. set (mutable)](#1031-set-mutable)
-      - [10.3.2. frozenset (immutable)](#1032-frozenset-immutable)
-    - [10.4. Mapping Types](#104-mapping-types)
-      - [10.4.1. dict](#1041-dict)
-    - [10.5. Special Types](#105-special-types)
-      - [10.5.1. `NoneType` (`None`)](#1051-`nonetype`-`none`)
-      - [10.5.2. `type` and `object`](#1052-`type`-and-`object`)
+    - [9.1. String And Binary Types](#91-string-and-binary-types)
+      - [9.1.1. String Type](#911-string-type)
+      - [9.1.2. Binary Types](#912-binary-types)
+    - [9.2. Sequence Types](#92-sequence-types)
+      - [9.2.1. List (mutable)](#921-list-mutable)
+      - [9.2.2. Tuple (immutable)](#922-tuple-immutable)
+      - [9.2.3. range](#923-range)
+    - [9.3. Set Types](#93-set-types)
+      - [9.3.1. set (mutable)](#931-set-mutable)
+      - [9.3.2. frozenset (immutable)](#932-frozenset-immutable)
+    - [9.4. Mapping Types](#94-mapping-types)
+      - [9.4.1. dict](#941-dict)
+    - [9.5. Special Types](#95-special-types)
+      - [9.5.1. `NoneType` (`None`)](#951-`nonetype`-`none`)
+      - [9.5.2. `type` and `object`](#952-`type`-and-`object`)
+    - [9.6. Summary](#96-summary)
+  - [10. Core Data Structures](#10-core-data-structures)
+    - [10.1. Lists](#101-lists)
+    - [10.2. Tuples](#102-tuples)
+    - [10.3. Sets](#103-sets)
+    - [10.4. Dictionaries](#104-dictionaries)
+    - [10.5. None](#105-none)
     - [10.6. Summary](#106-summary)
-  - [11. Core Data Structures](#11-core-data-structures)
-    - [11.1. Lists](#111-lists)
-    - [11.2. Tuples](#112-tuples)
-    - [11.3. Sets](#113-sets)
-    - [11.4. Dictionaries](#114-dictionaries)
-    - [11.5. None](#115-none)
-    - [11.6. Summary](#116-summary)
-  - [12. Functions And Parameter Passing](#12-functions-and-parameter-passing)
-    - [12.1. Defining A Function](#121-defining-a-function)
-    - [12.2. Returning Values](#122-returning-values)
-    - [12.3. Default Parameters](#123-default-parameters)
-    - [12.4. Positional And Keyword Arguments](#124-positional-and-keyword-arguments)
-    - [12.5. Arbitrary Arguments](#125-arbitrary-arguments)
-    - [12.6. Parameter Passing Model](#126-parameter-passing-model)
-    - [12.7. Summary](#127-summary)
+  - [11. Functions And Parameter Passing](#11-functions-and-parameter-passing)
+    - [11.1. Defining A Function](#111-defining-a-function)
+    - [11.2. Returning Values](#112-returning-values)
+    - [11.3. Default Parameters](#113-default-parameters)
+    - [11.4. Positional And Keyword Arguments](#114-positional-and-keyword-arguments)
+    - [11.5. Arbitrary Arguments](#115-arbitrary-arguments)
+    - [11.6. Parameter Passing Model](#116-parameter-passing-model)
+    - [11.7. Summary](#117-summary)
 <!--END_TOC-->
 
 This is an introduction to Python for experienced programmers who are new to the language.  It offers a curated selection of essential concepts to help you get up to speed quickly.
@@ -322,7 +327,7 @@ The [PEP 8 Style Guide](https://peps.python.org/pep-0008/#comments) has much to 
 
 The Python community widely follows naming conventions defined in [PEP 8](https://peps.python.org/pep-0008/).  The Python interpreter does not require the use of these naming conventions, but following them is good practice.  Following the conventions makes code feel "Pythonic".
 
-> NOTE: This section needs to touch on many things in Python that are named, so many language constructs are mentioned.  An effort has been made to include just enough explanation here to keep the material from feeling disorienting at this stage.  Sections beyond this one provide deeper explanations of topics first mentioned here.
+> This section needs to touch on many things in Python that are named, so many language constructs are mentioned.  An effort has been made to include just enough explanation here to keep the material from feeling disorienting at this stage.  Sections beyond this one provide deeper explanations of topics first mentioned here.
 
 ### 4.1. Summary Table
 
@@ -733,7 +738,9 @@ The following built-in types are **immutable**:
 
 The `memoryview` type can be either mutable or immutable, depending upon how it was instantiated.
 
-> **Note:** Most user-defined classes in Python are _mutable_ by default.  Unless you explicitly design your class to prevent modification, its instances can typically have attributes added, removed, or updated.  To enforce immutability, you can override `__setattr__`, use `__slots__`, or apply a decorator like `@dataclass(frozen=True)` from the `dataclasses` module.
+> 💡 **Mutability Of User-Defined Classes**
+>
+> Most user-defined classes in Python are _mutable_ by default.  Unless you explicitly design your class to prevent modification, its instances can typically have attributes added, removed, or updated.  To enforce immutability, you can override `__setattr__`, use `__slots__`, or apply a decorator like `@dataclass(frozen=True)` from the `dataclasses` module.
 
 This section references numerous Python built-in types.  For more details, see the next section on [Types](#8-types).
 
@@ -1036,37 +1043,152 @@ print(int(False))    # 0
 print(True + True)   # 2 (discouraged style — shown for demonstration only)
 ```
 
-### 8.3. Basic Sequence Types
+### 8.3. General Information About Sequences
 
-#### 8.3.1. list
+#### 8.3.1. What Is A Sequence?
 
-#### 8.3.2. tuple
+In Python, a _sequence_ is an ordered collection of items accessible by integer indices.
 
-#### 8.3.3. range
+All built-in sequences share these key properties:
 
-### 8.4. str
+- **Ordered**: The items have a defined order, and this order is preserved.
+- **Indexed**: Items can be accessed using zero-based integer indexing.
+- **Sliceable**: Portions of the sequence can be extracted using slice notation (`seq[start:stop:step]`).
+- **Iterable**: Sequences can be looped over using `for` loops and comprehensions.
+- **Length-aware**: The `len()` function returns the number of items in the sequence.
 
-### 8.5. Binary Sequence Types
+Some sequences are **mutable** (e.g., `list`, `bytearray`), meaning their contents can be changed after creation. Others are **immutable** (e.g., `tuple`, `str`, `range`, `bytes`), meaning they cannot be changed in place.
 
-#### 8.5.1. bytes
+Python defines sequence behavior formally through abstract base classes in the [`collections.abc`](https://docs.python.org/3/library/collections.abc.html) module:
 
-#### 8.5.2. bytearray
+- `collections.abc.Sequence`: defines the interface for **immutable sequences**
+- `collections.abc.MutableSequence`: extends `Sequence` with mutation methods (e.g., `append`, `remove`)
 
-#### 8.5.3. memoryview
+Most of Python’s built-in sequence types conform to one of these interfaces. These base classes aren’t typically used directly, but they define expected behavior and can be used for `isinstance()` checks in more advanced code.
 
-### 8.6. Set Types
+> 💡 **Note on `isinstance()`**  
+>
+> Python provides a built-in function `isinstance(obj, type)` to check whether an object is an instance of a particular class or abstract base class.  
+>
+> For example, to check if something behaves like a sequence:
+>
+> ```python
+> from collections.abc import Sequence
+> 
+> items = [1, 2, 3]
+> if isinstance(items, Sequence):
+>     print("This object supports sequence behavior.")
+> ```
+>
+> This works not just for built-in types like `list` or `tuple`, but for any object that conforms to the expected interface.
 
-#### 8.6.1. set
+#### 8.3.2. Common Sequence Operations
 
-#### 8.6.2. frozenset
+For reference, the table below shows common operations supported by most sequences, whether mutable or immutable.  The table is based on the section, [Common Sequence Operations](https://docs.python.org/3/library/stdtypes.html#common-sequence-operations), from the official Python documentation.  Please see the official table for important footnotes.
 
-### 8.7. dict
+According to the official documentation:
 
-### 8.8. Types About Types
+> This table lists the sequence operations sorted in ascending priority. In the table, `s` and `t` are sequences of the same type, `n`, `i`, `j` and `k` are integers and `x` is an arbitrary object that meets any type and value restrictions imposed by `s`.
 
-#### 8.8.1. NoneType
+| Operation              | Result                                                                    |
+|------------------------|---------------------------------------------------------------------------|
+| `x in s`               | `True` if an item of `s` is equal to `x`, else `False`                    |
+| `x not in s`           | `False` if an item of `s` is equal to `x`, else `True`                    |
+| `s + t`                | the concatenation of `s` and `t`                                          |
+| `s * n` or `n * s`     | equivalent to adding `s` to itself `n` times                              |
+| `s[i]`                 | `i`th item of `s`, origin 0                                               |
+| `s[i:j]`               | slice of `s` from `i` to `j`                                              |
+| `s[i:j:k]`             | slice of `s` from `i` to `j` with step `k`                                |
+| `len(s)`               | length of `s`                                                             |
+| `min(s)`               | smallest item of `s`                                                      |
+| `max(s)`               | largest item of `s`                                                       |
+| `s.index(x[, i[, j]])` | index of the first occurrence of `x` in `s` (at or after `i`, before `j`) |
+| `s.count(x)`           | total number of occurrences of `x` in `s`                                 |
 
-#### 8.8.2. type
+#### 8.3.3. Immutable Sequence Operations
+
+The only functionality implemented by immutable sequences that is not implemented by mutable sequences, is support for [`hash()`](https://docs.python.org/3/library/functions.html#hash).  `hash()` returns the hash value of an object.
+
+Since immutable sequences support `hash()`, they may be used as `dict` keys and stored in `set` and `frozenset` instances.
+
+Mutable sequences do not implement the `hash()` method because their contents can be changed after creation. Hash values must remain constant for the lifetime of an object, as they are used to determine the object's position in hash tables.
+
+#### 8.3.4. Mutable Sequence Operations
+
+For reference, the table below shows the operations defined on mutable sequences.  The table is based on the section, [Mutable Sequence Types](https://docs.python.org/3/library/stdtypes.html#mutable-sequence-types), from the official Python documentation.  Please see the official table for important footnotes.
+
+According to the official documentation:
+
+> In the table `s` is an instance of a mutable sequence type, `t` is any iterable object and `x` is an arbitrary object that meets any type and value restrictions imposed by `s` (for example, `bytearray` only accepts integers that meet the value restriction `0 <= x <= 255`).
+
+| Operation                 | Result                                                                       |
+|---------------------------|------------------------------------------------------------------------------|
+| `s[i] = x`                | item `i` of `s` is replaced by `x`                                           |
+| `s[i:j] = t`              | slice of `s` from `i` to `j` is replaced by the contents of the iterable `t` |
+| `del s[i:j]`              | same as `s[i:j] = []`                                                        |
+| `s[i:j:k] = t`            | the elements of `s[i:j:k]` are replaced by those of `t`                      |
+| `del s[i:j:k]`            | removes the elements of `s[i:j:k]` from the list                             |
+| `s.append(x)`             | appends `x` to the end of the sequence                                       |
+| `s.clear()`               | removes all items from `s`                                                   |
+| `s.copy()`                | creates a shallow copy of `s`                                                |
+| `s.extend(t)` or `s += t` | extends `s` with the contents of `t`                                         |
+| `s *= n`                  | updates `s` with its contents repeated `n` times                             |
+| `s.insert(i, x)`          | inserts `x` into `s` at the index given by `i`                               |
+| `s.pop()` or `s.pop(i)`   | retrieves the item at `i` and also removes it from `s`                       |
+| `s.remove(x)`             | removes the first item from `s` where `s[i]` is equal to `x`                 |
+| `s.reverse()`             | reverses the items of `s` in place                                           |
+
+#### 8.3.5. Built-In Sequence Summary
+
+This table summarizes the built-in sequence types, their mutability, and notes about how they are used.
+
+| Type       | Mutability | Notes                             |
+|------------|------------|-----------------------------------|
+| `list`     | Mutable    | General-purpose                   |
+| `tuple`    | Immutable  | Often used for fixed-size records |
+| `str`      | Immutable  | Text                              |
+| `range`    | Immutable  | Lightweight numeric sequence      |
+| `bytes`    | Immutable  | Binary data                       |
+| `bytearray`| Mutable    | Mutable binary data               |
+
+### 8.4. Basic Sequence Types
+
+The three basic sequence types are `list`, `tuple`, and `range`.
+
+Additionally:
+
+- The string type (`str`) is considered a sequence type.  It is covered in its own section.  See: [str](#85-str).
+- There are also a few sequence types for dealing with binary data.  See the section on [Binary Sequence Types](#86-binary-sequence-types).
+
+#### 8.4.1. list
+
+#### 8.4.2. tuple
+
+#### 8.4.3. range
+
+### 8.5. str
+
+### 8.6. Binary Sequence Types
+
+#### 8.6.1. bytes
+
+#### 8.6.2. bytearray
+
+#### 8.6.3. memoryview
+
+### 8.7. Set Types
+
+#### 8.7.1. set
+
+#### 8.7.2. frozenset
+
+### 8.8. dict
+
+### 8.9. Types About Types
+
+#### 8.9.1. NoneType
+
+#### 8.9.2. type
 
 ## 9. Other Built-In Types
 
@@ -1090,9 +1212,9 @@ To keep this guide brief and focused, certain built-in types are out of scope. P
 ---------------------------------
 
 
-### 10.1. String And Binary Types
+### 9.1. String And Binary Types
 
-#### 10.1.1. String Type
+#### 9.1.1. String Type
 
 See also Python's documentation for the [`str` type, also known as Text Sequence Type](https://docs.python.org/3/library/stdtypes.html#text-sequence-type-str).
 
@@ -1159,7 +1281,7 @@ print(f"{greeting} {name}{punctuation}")  # "Hello Bob!"
 
 And so on.
 
-#### 10.1.2. Binary Types
+#### 9.1.2. Binary Types
 
 See also Python's documentation for [Binary Sequence Types](https://docs.python.org/3/library/stdtypes.html#binary-sequence-types-bytes-bytearray-memoryview).
 
@@ -1218,11 +1340,11 @@ Binary types are useful when:
 - Processing network packets or byte-oriented protocols
 - Performing low-level manipulations or encodings (e.g., UTF-8, Base64)
 
-### 10.2. Sequence Types
+### 9.2. Sequence Types
 
 Python has several sequence types: `list`, `tuple`, `range`, `str`, and `bytes`.
 
-#### 10.2.1. List (mutable)
+#### 9.2.1. List (mutable)
 
 See also Python's documentation for ...
 
@@ -1239,7 +1361,7 @@ fruits = ["apple", "banana", "cherry"]
 - Length: `len(fruits)`
 - Lists can contain any type, including other lists.
 
-#### 10.2.2. Tuple (immutable)
+#### 9.2.2. Tuple (immutable)
 
 Tuples are ordered, immutable sequences.
 
@@ -1257,7 +1379,7 @@ point = (3, 4)
   not_a_tuple = (42)  # just an int
   ```
 
-#### 10.2.3. range
+#### 9.2.3. range
 
 Used for iteration over a sequence of numbers.
 
@@ -1270,11 +1392,11 @@ Efficient: doesn’t store the full sequence in memory.
 
 ---
 
-### 10.3. Set Types
+### 9.3. Set Types
 
 Sets are unordered collections of unique elements.
 
-#### 10.3.1. set (mutable)
+#### 9.3.1. set (mutable)
 
 ```python
 nums = {1, 2, 3}
@@ -1289,7 +1411,7 @@ nums.remove(2)
 
 To create an empty set, use `set()`. `{}` creates an empty `dict`.
 
-#### 10.3.2. frozenset (immutable)
+#### 9.3.2. frozenset (immutable)
 
 ```python
 f = frozenset([1, 2, 3])
@@ -1299,9 +1421,9 @@ Same behavior as `set`, but immutable.
 
 ---
 
-### 10.4. Mapping Types
+### 9.4. Mapping Types
 
-#### 10.4.1. dict
+#### 9.4.1. dict
 
 Dictionaries store key-value pairs.
 
@@ -1324,9 +1446,9 @@ scores["Charlie"] = 88
 
 ---
 
-### 10.5. Special Types
+### 9.5. Special Types
 
-#### 10.5.1. `NoneType` (`None`)
+#### 9.5.1. `NoneType` (`None`)
 
 Represents the absence of a value.
 
@@ -1336,14 +1458,14 @@ if x is None:
     ...
 ```
 
-#### 10.5.2. `type` and `object`
+#### 9.5.2. `type` and `object`
 
 - `type(x)` returns the type of `x`
 - `object` is the base class of all types
 
 ---
 
-### 10.6. Summary
+### 9.6. Summary
 
 | Category       | Types                            |
 |----------------|----------------------------------|
@@ -1358,13 +1480,13 @@ if x is None:
 - Others are **immutable** (`int`, `float`, `str`, `tuple`, `bytes`, `frozenset`)
 - Use `type(x)` or `isinstance(x, type)` to check an object’s type
 
-## 11. Core Data Structures
+## 10. Core Data Structures
 
 Python has four core built-in collection types: `list`, `tuple`, `set`, and `dict`. These are the backbone of most Python programs.
 
 > NOTE: This section covers the basics of using these data structures &mdash; enough to be productive and avoid surprises. Deeper topics (like comprehensions, unpacking, and iteration patterns) are covered later.
 
-### 11.1. Lists
+### 10.1. Lists
 
 Lists are ordered, mutable sequences.
 
@@ -1380,7 +1502,7 @@ fruits = ["apple", "banana", "cherry"]
 
 Lists can contain any type, including other lists.
 
-### 11.2. Tuples
+### 10.2. Tuples
 
 Tuples are ordered, immutable sequences.
 
@@ -1400,7 +1522,7 @@ one = (42,)  # this is a tuple
 not_a_tuple = (42)  # just an int
 ```
 
-### 11.3. Sets
+### 10.3. Sets
 
 Sets are unordered collections of unique values.
 
@@ -1416,7 +1538,7 @@ nums = {1, 2, 3}
 
 To make an empty set, use `set()`.  `{}` creates an empty `dict`.
 
-### 11.4. Dictionaries
+### 10.4. Dictionaries
 
 Dictionaries (or “dicts”) map keys to values.
 
@@ -1433,7 +1555,7 @@ scores = {"Alice": 90, "Bob": 85}
 
 Use `{}` to define a dict. To define an empty dict, use `{}` or `dict()`.
 
-### 11.5. None
+### 10.5. None
 
 Python uses `None` to represent the absence of a value.
 
@@ -1448,7 +1570,7 @@ value = None
   - Function return when there’s nothing else to return
   - Sentinel values
 
-### 11.6. Summary
+### 10.6. Summary
 
 - Use `list` for general-purpose, ordered, mutable sequences.
 - Use `tuple` for fixed-length, immutable groupings.
@@ -1456,11 +1578,11 @@ value = None
 - Use `dict` for key-value mappings.
 - Use `None` to represent “no value”.
 
-## 12. Functions And Parameter Passing
+## 11. Functions And Parameter Passing
 
 Functions in Python are defined using the `def` keyword. They support default arguments, keyword arguments, and flexible parameter unpacking.
 
-### 12.1. Defining A Function
+### 11.1. Defining A Function
 
 ```python
 def greet(name):
@@ -1471,7 +1593,7 @@ def greet(name):
 - Indentation defines the function body.
 - Functions return `None` by default if no `return` is given.
 
-### 12.2. Returning Values
+### 11.2. Returning Values
 
 Use `return` to return a value:
 
@@ -1480,7 +1602,7 @@ def square(x):
     return x * x
 ```
 
-### 12.3. Default Parameters
+### 11.3. Default Parameters
 
 You can provide default values:
 
@@ -1514,7 +1636,7 @@ def good(x=None):
     return x
 ```
 
-### 12.4. Positional And Keyword Arguments
+### 11.4. Positional And Keyword Arguments
 
 This example refers back to the `greet` function of the previous section.  Arguments can be passed by position or keyword:
 
@@ -1528,7 +1650,7 @@ greet(greeting="Hi", name="Alice")  # keyword order is flexible
 - Once you use a keyword argument, all remaining arguments must also be keywords.
 - Keyword arguments can appear in any order.
 
-### 12.5. Arbitrary Arguments
+### 11.5. Arbitrary Arguments
 
 You can use `*args` and `**kwargs` to accept flexible arguments:
 
@@ -1543,7 +1665,7 @@ demo(1, 2, 3, a=10, b=20)
 - `*args` is a tuple of extra positional args
 - `**kwargs` is a dict of extra keyword args
 
-### 12.6. Parameter Passing Model
+### 11.6. Parameter Passing Model
 
 Python uses **pass-by-assignment** (a.k.a. “pass-by-object-reference”):
 
@@ -1571,7 +1693,7 @@ print(a)  # 10 — unchanged
 
 In Python, mutability is a property of the type.  Each built-in type is either mutable or immutable by design.  This cannot be controlled on a per-variable basis.
 
-### 12.7. Summary
+### 11.7. Summary
 
 - Use `def` to define functions; they return `None` by default.
 - Use `return` to return a value.
