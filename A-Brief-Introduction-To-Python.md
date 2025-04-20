@@ -88,6 +88,7 @@
     - [10.5. Arbitrary Arguments](#105-arbitrary-arguments)
     - [10.6. Parameter Passing Model](#106-parameter-passing-model)
     - [10.7. Summary](#107-summary)
+  - [11. Next Topics](#11-next-topics)
 <!--END_TOC-->
 
 This is an introduction to Python for experienced programmers who are new to the language.  It offers a curated selection of essential concepts to help you get up to speed quickly.
@@ -2121,3 +2122,32 @@ In Python, mutability is a property of the type.  Each built-in type is either m
 - Arguments can be passed by position or keyword.
 - Use `*args` and `**kwargs` for flexible parameters.
 - Python passes arguments by object reference; mutability determines if changes affect the caller.  Mutability is a property of the type.
+
+## 11. Next Topics
+
+The next topics that will be described in this guide:
+
+- [ ] Program Structure And Scope
+- [ ] Exceptions And Error Handling (in more depth)
+- [ ] Logging
+- [ ] Testing And Assertions
+- [ ] Context Manager
+- [ ] Working With Files
+- [ ] Type Annotations And Optional Static Typing
+- [ ] Documentation And Docstrings
+- [ ] Comprehensions
+- [ ] Classes And Object-Oriented Programming
+- [ ] Iterators And Generators
+- [ ] Decorators
+- [ ] Virtual Environments And Packaging
+- [ ] Strings In Depth
+- [ ] Data Classes And Named Tuples
+- [ ] Type Annotations And Optional Static Typing
+- [ ] Argparse
+- [ ] Timeit And Profiling
+- [ ] Itertools And Functional Tools
+- [ ] Concurrency
+- [ ] Corutines And asyncio
+- [ ] Standard Library Tour / Highlights
+- [ ] Metaclasses And Advanced OOP
+- [ ] Descriptors And The Data Model
