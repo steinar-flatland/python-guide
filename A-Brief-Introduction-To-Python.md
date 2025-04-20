@@ -1,95 +1,96 @@
 # A Brief Introduction To Python
 
-> _This guide is incomplete.  This message will be removed when a first draft is complete._
-
 <!--BEGIN_TOC-->
 - [A Brief Introduction To Python](#a-brief-introduction-to-python)
-  - [1. Hello World](#1-hello-world)
-    - [1.1. Hello World v1](#11-hello-world-v1)
-    - [1.2. Hello World v2](#12-hello-world-v2)
-    - [1.3. Hello World v3](#13-hello-world-v3)
-  - [2. Statement Organization And Whitespace](#2-statement-organization-and-whitespace)
-    - [2.1. Indentation Is Syntax](#21-indentation-is-syntax)
-    - [2.2. How Much Indentation?](#22-how-much-indentation)
-    - [2.3. Colons Start Blocks](#23-colons-start-blocks)
-    - [2.4. One Statement Per Line (Usually)](#24-one-statement-per-line-usually)
-    - [2.5. Blank Lines And Grouping](#25-blank-lines-and-grouping)
-    - [2.6. Gotchas](#26-gotchas)
-  - [3. Comments](#3-comments)
-    - [3.1. Single-Line Comments](#31-single-line-comments)
-    - [3.2. Multi-Line Comments](#32-multi-line-comments)
-    - [3.3. Comment Style](#33-comment-style)
-  - [4. Naming Conventions](#4-naming-conventions)
-    - [4.1. Summary Table](#41-summary-table)
-    - [4.2. Variables And Functions](#42-variables-and-functions)
-    - [4.3. Classes](#43-classes)
-    - [4.4. Constants](#44-constants)
-    - [4.5. Modules And Packages](#45-modules-and-packages)
-    - [4.6. Underscores and Visibility](#46-underscores-and-visibility)
-    - [4.7. Style Guidance](#47-style-guidance)
-    - [4.8. Summary](#48-summary)
-  - [5. Control Flow](#5-control-flow)
-    - [5.1. if Statement](#51-if-statement)
-    - [5.2. for Loop](#52-for-loop)
-    - [5.3. while Loop](#53-while-loop)
-    - [5.4. break And continue](#54-break-and-continue)
-    - [5.5. else With Loops](#55-else-with-loops)
-    - [5.6. No switch Or case Statement](#56-no-switch-or-case-statement)
-    - [5.7. match Statement](#57-match-statement)
-    - [5.8. Exception Handling](#58-exception-handling)
-    - [5.9. with Statement](#59-with-statement)
-    - [5.10. Summary](#510-summary)
-  - [6. Operators And Precedence](#6-operators-and-precedence)
-  - [7. General Information About Types](#7-general-information-about-types)
-    - [7.1. Dynamic Typing](#71-dynamic-typing)
-    - [7.2. Truth Testing](#72-truth-testing)
-    - [7.3. Comparison](#73-comparison)
-    - [7.4. Mutable And Immutable](#74-mutable-and-immutable)
-  - [8. Types](#8-types)
-    - [8.1. Numeric Types](#81-numeric-types)
-      - [8.1.1. int](#811-int)
-      - [8.1.2. float](#812-float)
-      - [8.1.3. complex](#813-complex)
-    - [8.2. bool](#82-bool)
-    - [8.3. General Information About Sequences](#83-general-information-about-sequences)
-      - [8.3.1. What Is A Sequence?](#831-what-is-a-sequence)
-      - [8.3.2. Common Sequence Operations](#832-common-sequence-operations)
-      - [8.3.3. Immutable Sequence Operations](#833-immutable-sequence-operations)
-      - [8.3.4. Mutable Sequence Operations](#834-mutable-sequence-operations)
-      - [8.3.5. Built-In Sequence Summary](#835-built-in-sequence-summary)
-    - [8.4. Basic Sequence Types](#84-basic-sequence-types)
-      - [8.4.1. list](#841-list)
-      - [8.4.2. tuple](#842-tuple)
-      - [8.4.3. range](#843-range)
-    - [8.5. str](#85-str)
-    - [8.6. Binary Sequence Types](#86-binary-sequence-types)
-      - [8.6.1. bytes](#861-bytes)
-      - [8.6.2. bytearray](#862-bytearray)
-      - [8.6.3. memoryview](#863-memoryview)
-    - [8.7. Set Types](#87-set-types)
-      - [8.7.1. set](#871-set)
-      - [8.7.2. frozenset](#872-frozenset)
-    - [8.8. dict](#88-dict)
-    - [8.9. Types About Types](#89-types-about-types)
-      - [8.9.1. NoneType](#891-nonetype)
-        - [8.9.1.1. What Is None?](#8911-what-is-none)
-        - [8.9.1.2. Type and Identity](#8912-type-and-identity)
-        - [8.9.1.3. Truthiness](#8913-truthiness)
-      - [8.9.2. type](#892-type)
-        - [8.9.2.1. Uses As Function](#8921-uses-as-function)
-        - [8.9.2.2. Used As Class](#8922-used-as-class)
-        - [8.9.2.3. Summary](#8923-summary)
-  - [9. Other Built-In Types](#9-other-built-in-types)
-  - [10. Functions And Parameter Passing](#10-functions-and-parameter-passing)
-    - [10.1. Defining A Function](#101-defining-a-function)
-    - [10.2. Returning Values](#102-returning-values)
-    - [10.3. Default Parameters](#103-default-parameters)
-    - [10.4. Positional And Keyword Arguments](#104-positional-and-keyword-arguments)
-    - [10.5. Arbitrary Arguments](#105-arbitrary-arguments)
-    - [10.6. Parameter Passing Model](#106-parameter-passing-model)
-    - [10.7. Summary](#107-summary)
-  - [11. Next Topics](#11-next-topics)
+  - [1. Introduction](#1-introduction)
+  - [2. Hello World](#2-hello-world)
+    - [2.1. Hello World v1](#21-hello-world-v1)
+    - [2.2. Hello World v2](#22-hello-world-v2)
+    - [2.3. Hello World v3](#23-hello-world-v3)
+  - [3. Statement Organization And Whitespace](#3-statement-organization-and-whitespace)
+    - [3.1. Indentation Is Syntax](#31-indentation-is-syntax)
+    - [3.2. How Much Indentation?](#32-how-much-indentation)
+    - [3.3. Colons Start Blocks](#33-colons-start-blocks)
+    - [3.4. One Statement Per Line (Usually)](#34-one-statement-per-line-usually)
+    - [3.5. Blank Lines And Grouping](#35-blank-lines-and-grouping)
+    - [3.6. Gotchas](#36-gotchas)
+  - [4. Comments](#4-comments)
+    - [4.1. Single-Line Comments](#41-single-line-comments)
+    - [4.2. Multi-Line Comments](#42-multi-line-comments)
+    - [4.3. Comment Style](#43-comment-style)
+  - [5. Naming Conventions](#5-naming-conventions)
+    - [5.1. Summary Table](#51-summary-table)
+    - [5.2. Variables And Functions](#52-variables-and-functions)
+    - [5.3. Classes](#53-classes)
+    - [5.4. Constants](#54-constants)
+    - [5.5. Modules And Packages](#55-modules-and-packages)
+    - [5.6. Underscores and Visibility](#56-underscores-and-visibility)
+    - [5.7. Style Guidance](#57-style-guidance)
+    - [5.8. Summary](#58-summary)
+  - [6. Control Flow](#6-control-flow)
+    - [6.1. if Statement](#61-if-statement)
+    - [6.2. for Loop](#62-for-loop)
+    - [6.3. while Loop](#63-while-loop)
+    - [6.4. break And continue](#64-break-and-continue)
+    - [6.5. else With Loops](#65-else-with-loops)
+    - [6.6. No switch Or case Statement](#66-no-switch-or-case-statement)
+    - [6.7. match Statement](#67-match-statement)
+    - [6.8. Exception Handling](#68-exception-handling)
+    - [6.9. with Statement](#69-with-statement)
+    - [6.10. Summary](#610-summary)
+  - [7. Operators And Precedence](#7-operators-and-precedence)
+  - [8. General Information About Types](#8-general-information-about-types)
+    - [8.1. Dynamic Typing](#81-dynamic-typing)
+    - [8.2. Truth Testing](#82-truth-testing)
+    - [8.3. Comparison](#83-comparison)
+    - [8.4. Mutable And Immutable](#84-mutable-and-immutable)
+  - [9. Types](#9-types)
+    - [9.1. Numeric Types](#91-numeric-types)
+      - [9.1.1. int](#911-int)
+      - [9.1.2. float](#912-float)
+      - [9.1.3. complex](#913-complex)
+    - [9.2. bool](#92-bool)
+    - [9.3. General Information About Sequences](#93-general-information-about-sequences)
+      - [9.3.1. What Is A Sequence?](#931-what-is-a-sequence)
+      - [9.3.2. Common Sequence Operations](#932-common-sequence-operations)
+      - [9.3.3. Immutable Sequence Operations](#933-immutable-sequence-operations)
+      - [9.3.4. Mutable Sequence Operations](#934-mutable-sequence-operations)
+      - [9.3.5. Built-In Sequence Summary](#935-built-in-sequence-summary)
+    - [9.4. Basic Sequence Types](#94-basic-sequence-types)
+      - [9.4.1. list](#941-list)
+      - [9.4.2. tuple](#942-tuple)
+      - [9.4.3. range](#943-range)
+    - [9.5. str](#95-str)
+    - [9.6. Binary Sequence Types](#96-binary-sequence-types)
+      - [9.6.1. bytes](#961-bytes)
+      - [9.6.2. bytearray](#962-bytearray)
+      - [9.6.3. memoryview](#963-memoryview)
+    - [9.7. Set Types](#97-set-types)
+      - [9.7.1. set](#971-set)
+      - [9.7.2. frozenset](#972-frozenset)
+    - [9.8. dict](#98-dict)
+    - [9.9. Types About Types](#99-types-about-types)
+      - [9.9.1. NoneType](#991-nonetype)
+        - [9.9.1.1. What Is None?](#9911-what-is-none)
+        - [9.9.1.2. Type and Identity](#9912-type-and-identity)
+        - [9.9.1.3. Truthiness](#9913-truthiness)
+      - [9.9.2. type](#992-type)
+        - [9.9.2.1. Uses As Function](#9921-uses-as-function)
+        - [9.9.2.2. Used As Class](#9922-used-as-class)
+        - [9.9.2.3. Summary](#9923-summary)
+  - [10. Other Built-In Types](#10-other-built-in-types)
+  - [11. Functions And Parameter Passing](#11-functions-and-parameter-passing)
+    - [11.1. Defining A Function](#111-defining-a-function)
+    - [11.2. Returning Values](#112-returning-values)
+    - [11.3. Default Parameters](#113-default-parameters)
+    - [11.4. Positional And Keyword Arguments](#114-positional-and-keyword-arguments)
+    - [11.5. Arbitrary Arguments](#115-arbitrary-arguments)
+    - [11.6. Parameter Passing Model](#116-parameter-passing-model)
+    - [11.7. Summary](#117-summary)
+  - [12. Next Topics](#12-next-topics)
 <!--END_TOC-->
+
+## 1. Introduction
 
 This is an introduction to Python for experienced programmers who are new to the language.  It offers a curated selection of essential concepts to help you get up to speed quickly.
 
@@ -99,9 +100,9 @@ For clarity and convenience, this guide includes some excerpts from the official
 
 It is assumed you already have Python installed and available at the shell prompt.
 
-## 1. Hello World
+## 2. Hello World
 
-### 1.1. Hello World v1
+### 2.1. Hello World v1
 
 This is the simplest possible hello world program:
 
@@ -125,7 +126,7 @@ Summary of _module_ vs. _script:
 - Not every module is a script.  A script is a `.py` file that the author designs for passing to the `python` interpreter to start program execution.
 - `.py` file might be a module but not a script.  Such a module holds code for reuse by other modules through an import mechanism.
 
-### 1.2. Hello World v2
+### 2.2. Hello World v2
 
 This version of the hello world program has a `main()` function.  It is designed both for running as an independent script and for importing into another module that wants to use the function.
 
@@ -144,7 +145,7 @@ Save this file as `hello.py` and run it with `python hello.py`.
 - When running `python hello.py`, the interpreter immediately calls `main()`.
 - When importing `hello.py` into another module, the interpreter does not call `main()`; rather, the module doing the importing must call `main()` explicitly.
 
-### 1.3. Hello World v3
+### 2.3. Hello World v3
 
 This example shows how to import the module of the previous section and call its `main()` function:
 
@@ -156,9 +157,9 @@ hello.main()
 
 Save this code as `call_hello.py` in the same directory as `hello.py`, and run it with `python call_hello.py`.
 
-## 2. Statement Organization And Whitespace
+## 3. Statement Organization And Whitespace
 
-### 2.1. Indentation Is Syntax
+### 3.1. Indentation Is Syntax
 
 Python does not use opening and closing braces or keywords like `begin` and `end` to group statements; rather, consistent indentation defines blocks of code.
 
@@ -170,7 +171,7 @@ print("This line is outside the block")
 
 ```
 
-### 2.2. How Much Indentation?
+### 3.2. How Much Indentation?
 
 The standard is 4 spaces per level.
 
@@ -178,7 +179,7 @@ The standard is 4 spaces per level.
 - Python raises an error on a mixture of tabs and spaces in the same file, and even if it doesn't, results may vary between editors or environments.
 - The [PEP 8 Style Guide for Python Code](https://peps.python.org/pep-0008/) recommends 4 spaces, and formatters commonly follow this.
 
-### 2.3. Colons Start Blocks
+### 3.3. Colons Start Blocks
 
 Any block-opening statement ends in a colon (`:`), such as:
 
@@ -197,7 +198,7 @@ try:
     ...
 ```
 
-### 2.4. One Statement Per Line (Usually)
+### 3.4. One Statement Per Line (Usually)
 
 One statement per line is the norm.
 
@@ -229,21 +230,21 @@ To continue long lines:
   )
   ```
 
-### 2.5. Blank Lines And Grouping
+### 3.5. Blank Lines And Grouping
 
 - The interpreter ignores blank lines.
 - Use blank lines to separate logical sections of code.
 - Two blank lines between top-level functions and classes is the convention per [PEP 8](https://peps.python.org/pep-0008/).
 
-### 2.6. Gotchas
+### 3.6. Gotchas
 
 - Indentation must be consistent within a block.
 - Mixing tabs and spaces may work in the local development environment and then fail elsewhere.
 - Accidentally misaligning a line can silently alter logic.  Python does not warn if the indentation is syntactically valid but semantically incorrect.
 
-## 3. Comments
+## 4. Comments
 
-### 3.1. Single-Line Comments
+### 4.1. Single-Line Comments
 
 On any line, the Python interpreter ignores from the first `#` character to end of line.
 
@@ -254,7 +255,7 @@ print("Hello, world!")  # This inline comment is also ignored by Python
 
 When an inline comment follows code on the same line, it is suggested to separate the code and the comment by at least two spaces for readability.
 
-### 3.2. Multi-Line Comments
+### 4.2. Multi-Line Comments
 
 Unlike some languages, Python does not have a special syntax for multi-line block comments​.  Instead, use multiple successive single-line comments, like this:
 
@@ -303,17 +304,17 @@ greet(name)
 
 To avoid uncertainty regarding whether triple-quoted strings are loaded into memory, some developers stick with the `#` syntax for multi-line comments.
 
-### 3.3. Comment Style
+### 4.3. Comment Style
 
 The [PEP 8 Style Guide](https://peps.python.org/pep-0008/#comments) has much to say about commenting style.  Check it out and proceed as you see fit.  This guide skips those details, for brevity.
 
-## 4. Naming Conventions
+## 5. Naming Conventions
 
 The Python community widely follows naming conventions defined in [PEP 8](https://peps.python.org/pep-0008/).  The Python interpreter does not require the use of these naming conventions, but following them is good practice.  Following the conventions makes code feel "Pythonic".
 
 > This section needs to touch on many things in Python that are named, so many language constructs are mentioned.  An effort has been made to include just enough explanation here to keep the material from feeling disorienting at this stage.  Sections beyond this one provide deeper explanations of topics first mentioned here.
 
-### 4.1. Summary Table
+### 5.1. Summary Table
 
 | Construct                        | Convention        | Example                    |
 |----------------------------|-------------------|----------------------------|
@@ -327,7 +328,7 @@ The Python community widely follows naming conventions defined in [PEP 8](https:
 | Name mangling       | `__double_leading`   | `__internal_data`       |
 | Special Python methods     | `__dunder__`       | `__init__`, `__str__`      |
 
-### 4.2. Variables And Functions
+### 5.2. Variables And Functions
 
 Use lowercase with underscores (`snake_case`) for variable names, function names, and method names.
 
@@ -339,7 +340,7 @@ def calculate_average(values):
 
 Avoid `camelCase` and short cryptic names unless truly obvious in context (e.g., `i`, `x`, `y` in a short loop).
 
-### 4.3. Classes
+### 5.3. Classes
 
 Class names use `PascalCase` (sometimes called `UpperCamelCase`).  Do not use underscores.
 
@@ -351,7 +352,7 @@ class DataProcessor:
 
 (Note: `pass` is Python for "do nothing".)
 
-### 4.4. Constants
+### 5.4. Constants
 
 Constants are named in `ALL_CAPS`, typically defined at the top of a module.
 
@@ -360,7 +361,7 @@ MAX_ATTEMPTS = 5
 PI = 3.14159
 ```
 
-### 4.5. Modules And Packages
+### 5.5. Modules And Packages
 
 - Module names (i.e., `.py` files) should use `snake_case`, all lowercase. Avoid dashes or capital letters.  Examples: `math_utils.py`, `my_script.py`.
 - Package names (i.e., folders containing modules) follow the same `snake_case` convention.
@@ -374,7 +375,7 @@ my_package/
 ├── constants.py
 ```
 
-### 4.6. Underscores and Visibility
+### 5.6. Underscores and Visibility
 
 Python doesn’t enforce access restrictions (`private`, `protected`, etc.). Instead, it uses naming conventions:
 
@@ -382,21 +383,21 @@ Python doesn’t enforce access restrictions (`private`, `protected`, etc.). Ins
 - `__double_leading_underscore`: triggers name mangling, which makes the name harder to access from outside (e.g., from subclasses).  More on this later, in a discussion on object oriented programming.
 - `__double_underscores__` (“dunder”): reserved for Python-defined special methods like `__init__`, `__str__`, etc. Do not invent your own.
 
-### 4.7. Style Guidance
+### 5.7. Style Guidance
 
 - Avoid names like `l`, `O`, or `I` because they are visually ambiguous.
 - Choose clear names over short ones.  Python values readability over brevity.
 - Let tools like the [black](https://github.com/psf/black) code formatter, the [flake8](https://flake8.pycqa.org/en/latest/) linter, or your IDE guide you.  Tools like this typically apply [PEP 8](https://peps.python.org/pep-0008/) by default.
 
-### 4.8. Summary
+### 5.8. Summary
 
 Use `snake_case` for most things, `PascalCase` for classes, and `ALL_CAPS` for constants. Avoid `camelCase`. Use `_` to signal internal use, and `__dunder__` only for Python’s special methods.
 
-## 5. Control Flow
+## 6. Control Flow
 
 Python provides standard control flow constructs like `if`, `for`, and `while`, along with a few distinctive features. As with other Python syntax, indentation defines blocks.  There are no braces.
 
-### 5.1. if Statement
+### 6.1. if Statement
 
 ```python
 if x > 0:
@@ -411,7 +412,7 @@ else:
 - Parentheses around conditions are allowed but not required (and not idiomatic).
 - The colon at the end of each control line starts a new block, defined by indentation.
 
-### 5.2. for Loop
+### 6.2. for Loop
 
 Python's `for` loops iterate directly over items in a sequence.
 
@@ -441,7 +442,7 @@ for name, score in zip(["Alice", "Bob"], [85, 92]):
     print(name, score)
 ```
 
-### 5.3. while Loop
+### 6.3. while Loop
 
 Python's `while` loops are straightforward:
 
@@ -453,7 +454,7 @@ while x > 0:
 
 As with `for` loops, indentation defines the block. No parentheses are needed around the condition.
 
-### 5.4. break And continue
+### 6.4. break And continue
 
 These work as in other C-like languages:
 
@@ -469,7 +470,7 @@ for ch in "hello":
 - `continue` skips to the next iteration.
 - `break` exits the loop.
 
-### 5.5. else With Loops
+### 6.5. else With Loops
 
 Python allows an `else` clause on `for` and `while` loops. It runs only if the loop completes normally &mdash; that is, not interrupted by a `break`.
 
@@ -483,7 +484,7 @@ else:
 
 This is an uncommon feature but occasionally useful in search patterns.
 
-### 5.6. No switch Or case Statement
+### 6.6. No switch Or case Statement
 
 Python does not have a `switch` or `case` statement.  Instead, use a chain of `if`/`elif`/`else` statements, or use a dictionary for dispatch, as shown below:
 
@@ -500,7 +501,7 @@ The code inside `{}` defines what other languages call a map or dictionary (call
 
 Note that `dict` lookup using square brackets `[]` is also supported; however, that was not used here by design.  `get()` provides a safe lookup, whereas `[]` throws an error if the key is not found.
 
-### 5.7. match Statement
+### 6.7. match Statement
 
 Starting in Python 3.10, there is a new `match` statement, often referred to as [_structural pattern matching_](https://peps.python.org/pep-0636/).
 
@@ -518,7 +519,7 @@ match command:
 
 It's not quite the same as a `switch` in other languages, because it supports powerful pattern matching, not just value matching.
 
-### 5.8. Exception Handling
+### 6.8. Exception Handling
 
 Python has a familiar feeling exception handling feature.
 
@@ -551,7 +552,7 @@ except (ValueError, TypeError):
     print("Caught either a ValueError or TypeError.")
 ```
 
-### 5.9. with Statement
+### 6.9. with Statement
 
 `with` statements ensure that resources like files will be released when the program is done with them.  For example:
 
@@ -568,7 +569,7 @@ except FileNotFoundError:
 - Calling `file.close()` is not necessary.  The `with` takes care of that.
 - Even if `file.read()` raises an exception, the file is closed.
 
-### 5.10. Summary
+### 6.10. Summary
 
 - Use `if` / `elif` / `else` for conditional logic.
 - Python’s `for` loops iterate over sequences, not numeric indices.
@@ -583,7 +584,7 @@ except FileNotFoundError:
 
 For more information, see Python's article on [Compound Statements](https://docs.python.org/3/reference/compound_stmts.html).
 
-## 6. Operators And Precedence
+## 7. Operators And Precedence
 
 Python has a rich set of operators.  They are covered in the [Expressions](https://docs.python.org/3/reference/expressions.html#) section of Python's documentation.
 
@@ -612,11 +613,11 @@ For reference, this is Python's operator precedence table, based on the full tab
 
 Even with many Python-specific features, this table still feels familiar to developers who are coming from C-like languages.
 
-## 7. General Information About Types
+## 8. General Information About Types
 
 This section covers general information about Python's type system.
 
-### 7.1. Dynamic Typing
+### 8.1. Dynamic Typing
 
 The first and most important thing to understand about Python and types is that the language is dynamically typed. This means:
 
@@ -640,7 +641,7 @@ The type of a variable can change at any time during execution.  This is because
 - A variable can be rebound to a different object at any time.
 - A variable's current "type" is really just the type of the object it refers to right now.
 
-### 7.2. Truth Testing
+### 8.2. Truth Testing
 
 Any object, regardless of its type, can be tested for truth in an `if` statement, `while` loop, or using Boolean operators such as `==`, `<`, `>`, and so on.
 
@@ -661,13 +662,13 @@ The table below shows common falsy expressions involving empty sequences and col
 | `set()` | `set` | Empty set |
 | `range(0)` | `range` | An empty range (a sequence of 0 values) |
 
-More detail on the types listed above is provided in the next section on [Types](#8-types).
+More detail on the types listed above is provided in the next section on [Types](#9-types).
 
 To describe how object values behave in Boolean contexts, the Python community uses the terms _truthy_ and _falsy_.  A falsy value is one that evaluates to `False`. Everything else is truthy.
 
 One final note: When using Python for object-oriented programming, instances of user-defined classes are truthy by default.  To customize this behavior, a class can define the method `__bool__(self)` to control its truth value.
 
-### 7.3. Comparison
+### 8.3. Comparison
 
 There are 8 comparison operators in Python.  Each compares two objects and produces a Boolean result.  The operators are:
 
@@ -687,11 +688,11 @@ Ordering comparisons (`<`, `<=`, `>`, `>=`) are defined on some built-in types b
 - `set` supports subset/superset comparisons using these operators
 - `dict` does not support ordering comparisons at all
 
-A full discussion of type-specific behavior appears in the next section: [Types](#8-types).
+A full discussion of type-specific behavior appears in the next section: [Types](#9-types).
 
 Proceed with caution.  This is an area that can surprise even experienced developers new to Python.
 
-### 7.4. Mutable And Immutable
+### 8.4. Mutable And Immutable
 
 All types in Python are either _mutable_ or _immutable_.  Mutable types can be changed after they are created.  Immutable types cannot.  Mutability is important, because it affects how data behaves when passed around, stored, or shared.
 
@@ -724,17 +725,17 @@ The `memoryview` type can be either mutable or immutable, depending upon how it 
 
 > 💡 **Mutability Of User-Defined Classes**:  Most user-defined classes in Python are _mutable_ by default.  Unless you explicitly design your class to prevent modification, its instances can typically have attributes added, removed, or updated.  To enforce immutability, you can override `__setattr__`, use `__slots__`, or apply a decorator like `@dataclass(frozen=True)` from the `dataclasses` module.
 
-This section references numerous Python built-in types.  For more details, see the next section on [Types](#8-types).
+This section references numerous Python built-in types.  For more details, see the next section on [Types](#9-types).
 
-## 8. Types
+## 9. Types
 
 This section introduces many of Python's built-in types.
 
-Familiarity with the preceding section, [General Information About Types](#7-general-information-about-types), is assumed.
+Familiarity with the preceding section, [General Information About Types](#8-general-information-about-types), is assumed.
 
 See also: Python's official documentation on [Built-in Types](https://docs.python.org/3/library/stdtypes.html).
 
-### 8.1. Numeric Types
+### 9.1. Numeric Types
 
 Python has three built-in numeric types:
 
@@ -772,7 +773,7 @@ See also the [math](https://docs.python.org/3/library/math.html#module-math) mod
 
 See also the [cmath](https://docs.python.org/3/library/cmath.html#module-cmath) module for additional mathematical functions for complex numbers.
 
-#### 8.1.1. int
+#### 9.1.1. int
 
 Languages such as C, Java, and C#, which have fixed width integer types that wrap around or overflow.  In contrast, the Python `int` type has unlimited precision, limited only by the memory of the machine where the program is running.
 
@@ -871,7 +872,7 @@ print(f"{g} is_integer? {g.is_integer()}")               # 5.0 is_integer? True
 print(f"{h} is_integer? {h.is_integer()}\n")             # 5.1 is_integer? False
 ```
 
-#### 8.1.2. float
+#### 9.1.2. float
 
 The Python `float` type is typically implemented as a C `double` &mdash; a 64-bit representation based on the [IEEE 754](https://en.wikipedia.org/wiki/IEEE_754) standard.
 
@@ -939,7 +940,7 @@ print(f"a.hex() = {a.hex()}")                    # a.hex() = 0x1.7000000000000p+
 print(f"float.fromhex(a.hex()) = {float.fromhex(a.hex())}\n")  # float.fromhex(a.hex()) = 5.75
 ```
 
-#### 8.1.3. complex
+#### 9.1.3. complex
 
 Python implements complex numbers through the `complex` type.  Complex numbers consist of a real part and an imaginary part, each represented by a floating point number.  In Python code, an expression like `2 + 3j` represents a complex number, where `2` is the real part, and `3j` is the imaginary part. `j` represents the imaginary unit (√–1), following the convention used in electrical engineering (where `i` is typically used for current).
 
@@ -984,11 +985,11 @@ print(f"Roots of x² + 2x + 5 = 0 are {root1} and {root2}")
 # Roots are complex: (-1+2j) and (-1-2j)
 ```
 
-### 8.2. bool
+### 9.2. bool
 
 The Boolean type in Python is `bool`.  There are two constant instances of this type:  `True` and `False`.
 
-The built-in function `bool()` converts any value or expression to `bool` according to whether it is truthy or falsy as discussed earlier in the [Truth Testing](#72-truth-testing) section.
+The built-in function `bool()` converts any value or expression to `bool` according to whether it is truthy or falsy as discussed earlier in the [Truth Testing](#82-truth-testing) section.
 
 Use the operators `and`, `or`, and `not` to build logical expressions.  Like in many languages, `and` and `or` are short-circuiting: Evaluation stops as soon as the result is determined.
 
@@ -1025,9 +1026,9 @@ print(int(False))    # 0
 print(True + True)   # 2 (discouraged style — shown for demonstration only)
 ```
 
-### 8.3. General Information About Sequences
+### 9.3. General Information About Sequences
 
-#### 8.3.1. What Is A Sequence?
+#### 9.3.1. What Is A Sequence?
 
 In Python, a _sequence_ is an ordered collection of items accessible by integer indices.
 
@@ -1064,7 +1065,7 @@ Most of Python’s built-in sequence types conform to one of these interfaces. T
 >
 > This works not just for built-in types like `list` or `tuple`, but for any object that conforms to the expected interface.
 
-#### 8.3.2. Common Sequence Operations
+#### 9.3.2. Common Sequence Operations
 
 For reference, the table below shows common operations supported by most sequences, whether mutable or immutable.  The table is based on the section, [Common Sequence Operations](https://docs.python.org/3/library/stdtypes.html#common-sequence-operations), from the official Python documentation.  Please see the official table for important footnotes.
 
@@ -1087,7 +1088,7 @@ According to the official documentation:
 | `s.index(x[, i[, j]])` | index of the first occurrence of `x` in `s` (at or after `i`, before `j`) |
 | `s.count(x)`           | total number of occurrences of `x` in `s`                                 |
 
-#### 8.3.3. Immutable Sequence Operations
+#### 9.3.3. Immutable Sequence Operations
 
 The only functionality implemented by immutable sequences that is not implemented by mutable sequences, is support for [`hash()`](https://docs.python.org/3/library/functions.html#hash).  `hash()` returns the hash value of an object.
 
@@ -1095,7 +1096,7 @@ Since immutable sequences support `hash()`, they may be used as `dict` keys and 
 
 Mutable sequences do not implement the `hash()` method because their contents can be changed after creation. Hash values must remain constant for the lifetime of an object, as they are used to determine the object's position in hash tables.
 
-#### 8.3.4. Mutable Sequence Operations
+#### 9.3.4. Mutable Sequence Operations
 
 For reference, the table below shows the operations defined on mutable sequences.  The table is based on the section, [Mutable Sequence Types](https://docs.python.org/3/library/stdtypes.html#mutable-sequence-types), from the official Python documentation.  Please see the official table for important footnotes.
 
@@ -1120,7 +1121,7 @@ According to the official documentation:
 | `s.remove(x)`             | removes the first item from `s` where `s[i]` is equal to `x`                 |
 | `s.reverse()`             | reverses the items of `s` in place                                           |
 
-#### 8.3.5. Built-In Sequence Summary
+#### 9.3.5. Built-In Sequence Summary
 
 This table summarizes the built-in sequence types, their mutability, and notes about how they are used.
 
@@ -1133,11 +1134,11 @@ This table summarizes the built-in sequence types, their mutability, and notes a
 | `bytes`    | Immutable  | Binary data                       |
 | `bytearray`| Mutable    | Mutable binary data               |
 
-### 8.4. Basic Sequence Types
+### 9.4. Basic Sequence Types
 
 The three basic sequence types are `list`, `tuple`, and `range`.
 
-#### 8.4.1. list
+#### 9.4.1. list
 
 The `list` type is Python’s most commonly used built-in sequence. It is ordered, mutable, and heterogeneous &mdash; it can contain elements of different types.
 
@@ -1242,7 +1243,7 @@ print(nested)  # [[1], [2]]   # original unaltered
 print(copy)    # [[99], [2]]  # deep copy was modified
 ```
 
-#### 8.4.2. tuple
+#### 9.4.2. tuple
 
 The `tuple` type is an immutable sequence. Tuples are often used to group related values together, especially when their structure is fixed.
 
@@ -1320,7 +1321,7 @@ print(city)  # NYC
 
 > 💡 **Tip:** Use tuples when the structure of the data is fixed, and you want to prevent accidental modification.
 
-#### 8.4.3. range
+#### 9.4.3. range
 
 The `range` type represents an immutable sequence of integers. It's most commonly used for looping a specific number of times or generating integer sequences efficiently.
 
@@ -1372,7 +1373,7 @@ for i, name in enumerate(names):
 
 > 💡 `range` objects behave like read-only sequences. You can index, slice, and iterate over them, but you can't change them in place.
 
-### 8.5. str
+### 9.5. str
 
 The `str` type represents a sequence of Unicode characters. Strings are immutable.
 
@@ -1486,7 +1487,7 @@ To view all available string methods:
 help(str)
 ```
 
-### 8.6. Binary Sequence Types
+### 9.6. Binary Sequence Types
 
 As stated in the official Python documentation for [Binary Sequence Types](https://docs.python.org/3/library/stdtypes.html#binary-sequence-types-bytes-bytearray-memoryview):
 
@@ -1494,7 +1495,7 @@ As stated in the official Python documentation for [Binary Sequence Types](https
 
 These types represent sequences of bytes &mdash; integers in the range 0–255 &mdash; and are used for working with raw binary data such as file contents, network packets, or low-level protocol buffers. While `bytes` is immutable and behaves similarly to a `str`, `bytearray` is mutable. `memoryview` provides a zero-copy way to work with buffers exposed by other binary-compatible objects.
 
-#### 8.6.1. bytes
+#### 9.6.1. bytes
 
 The `bytes` type represents an immutable sequence of bytes (integers in the range 0–255). It is commonly used for handling raw binary data, such as file contents or network messages.
 
@@ -1549,7 +1550,7 @@ print(decoded)                     # 'hello'
 
 Use `bytes` when working with binary files, protocols, or external data that is not inherently textual.
 
-#### 8.6.2. bytearray
+#### 9.6.2. bytearray
 
 The `bytearray` type represents a mutable sequence of bytes (integers in the range 0–255). It behaves similarly to `bytes`, but allows in-place modification of its contents.
 
@@ -1604,7 +1605,7 @@ print(b2)               # b'Hxllo! W'
 
 `bytearray` is commonly used for working with mutable binary data, especially when performance is important or you need to modify the contents in place.
 
-#### 8.6.3. memoryview
+#### 9.6.3. memoryview
 
 The `memoryview` type provides a way to access the memory of another binary object without copying it. This is especially useful for efficient slicing, manipulation, and I/O operations on large binary data.
 
@@ -1667,13 +1668,13 @@ m[0] = 72                  # TypeError: cannot modify read-only memory
 
 > 💡 Use `memoryview` when performance matters, especially for large data structures or low-level binary manipulations.
 
-### 8.7. Set Types
+### 9.7. Set Types
 
 Sets are useful when you need to eliminate duplicates, perform membership tests, or do mathematical set operations like union and intersection.
 
 There are two built-in set types:  `set` (mutable) and `frozenset` (immutable).
 
-#### 8.7.1. set
+#### 9.7.1. set
 
 The `set` type represents a mutable, unordered collection of unique elements.
 
@@ -1746,7 +1747,7 @@ Attempting to include a list in a set results in a `TypeError`:
 
 > 🔒 The elements of a set must be _hashable_, which means they must be immutable and implement a `__hash__()` method.
 
-#### 8.7.2. frozenset
+#### 9.7.2. frozenset
 
 A `frozenset` is an immutable version of a `set`. Like the `set` type, `frozenset` contains only unique, unordered, hashable elements, but once created, its contents cannot be changed.
 
@@ -1784,7 +1785,7 @@ print(d[frozenset([1, 2])])  # "pair"
 
 > 🔒 Use `frozenset` when you need a set that can safely be used in hashed collections or shared across code without being modified.
 
-### 8.8. dict
+### 9.8. dict
 
 A `dict` (short for _dictionary_) is a mutable, unordered collection of key-value pairs. Dictionaries are sometimes called _maps_ or _hash maps_ in other languages. They allow fast lookup, insertion, and deletion of values based on keys.
 
@@ -1886,13 +1887,13 @@ For more methods, refer to [Mapping Types](https://docs.python.org/3/library/std
 
 > 💡 Dictionaries have excellent performance characteristics for most typical use cases.
 
-### 8.9. Types About Types
+### 9.9. Types About Types
 
-#### 8.9.1. NoneType
+#### 9.9.1. NoneType
 
 Python has a special singleton object called `None`, which is the sole instance of the built-in `NoneType`.
 
-##### 8.9.1.1. What Is None?
+##### 9.9.1.1. What Is None?
 
 `None` represents the absence of a value, a placeholder for “nothing” or “no result.” It is often used:
 
@@ -1912,7 +1913,7 @@ greet()          # Hello, guest!
 greet("Alice")   # Hello, Alice!
 ```
 
-##### 8.9.1.2. Type and Identity
+##### 9.9.1.2. Type and Identity
 
 ```python
 print(type(None))         # <class 'NoneType'>
@@ -1927,7 +1928,7 @@ if value is None:         # idiomatic
     ...
 ```
 
-##### 8.9.1.3. Truthiness
+##### 9.9.1.3. Truthiness
 
 `None` is **falsy**, so it evaluates to `False` in boolean contexts:
 
@@ -1936,11 +1937,11 @@ if not None:
     print("This runs!")   # This runs!
 ```
 
-#### 8.9.2. type
+#### 9.9.2. type
 
 Python’s built-in `type` object is both a function and a class.
 
-##### 8.9.2.1. Uses As Function
+##### 9.9.2.1. Uses As Function
 
 When called with a single argument, `type()` returns the type of the object:
 
@@ -1961,7 +1962,7 @@ print(isinstance(True, int))   # True — bool is a subclass of int
 print(type(True) == int)       # False — type is 'bool', not exactly 'int'
 ```
 
-##### 8.9.2.2. Used As Class
+##### 9.9.2.2. Used As Class
 
 When called with three arguments, `type()` is a _dynamic class constructor_ &mdash; it creates a new type (i.e., class) dynamically at runtime.
 
@@ -1974,14 +1975,14 @@ print(obj.x)          # 42
 
 This is rarely needed in beginner-level code but is powerful for advanced use cases like metaprogramming, code generation, and custom class construction in frameworks.
 
-##### 8.9.2.3. Summary
+##### 9.9.2.3. Summary
 
 - `type(obj)` &mdash; returns the type of an object (commonly used)
 - `type(name, bases, dict)` &mdash; creates a new type dynamically (advanced)
 
 For more details, see the [`type()` built-in function](https://docs.python.org/3/library/functions.html#type).
 
-## 9. Other Built-In Types
+## 10. Other Built-In Types
 
 To keep this guide focused, certain built-in types are out of scope. Python's full article on [Built-in Types](https://docs.python.org/3/library/stdtypes.html) covers many additional topics, including:
 
@@ -1998,11 +1999,11 @@ To keep this guide focused, certain built-in types are out of scope. Python's fu
 
 > This guide focused on the core built-in types you'll encounter in day-to-day Python programming. If you're curious to dig deeper, the [Built-in Types](https://docs.python.org/3/library/stdtypes.html) section of the Python docs is an excellent next step.
 
-## 10. Functions And Parameter Passing
+## 11. Functions And Parameter Passing
 
 Functions in Python are defined using the `def` keyword. They support default arguments, keyword arguments, and flexible parameter unpacking.
 
-### 10.1. Defining A Function
+### 11.1. Defining A Function
 
 ```python
 def greet(name):
@@ -2013,7 +2014,7 @@ def greet(name):
 - Indentation defines the function body.
 - Functions return `None` by default if no `return` is given.
 
-### 10.2. Returning Values
+### 11.2. Returning Values
 
 Use `return` to return a value:
 
@@ -2022,7 +2023,7 @@ def square(x):
     return x * x
 ```
 
-### 10.3. Default Parameters
+### 11.3. Default Parameters
 
 You can provide default values:
 
@@ -2057,7 +2058,7 @@ Default arguments are evaluated once when the function is defined, not each time
 >    return x
 >```
 
-### 10.4. Positional And Keyword Arguments
+### 11.4. Positional And Keyword Arguments
 
 This example refers back to the `greet` function of the previous section.  Arguments can be passed by position or keyword:
 
@@ -2071,7 +2072,7 @@ greet(greeting="Hi", name="Alice")  # keyword order is flexible
 - Once you use a keyword argument, all remaining arguments must also be keywords.
 - Keyword arguments may appear in any order.
 
-### 10.5. Arbitrary Arguments
+### 11.5. Arbitrary Arguments
 
 You can use `*args` and `**kwargs` to accept flexible arguments:
 
@@ -2086,7 +2087,7 @@ demo(1, 2, 3, a=10, b=20)
 - `*args` is a tuple of extra positional args
 - `**kwargs` is a dict of extra keyword args
 
-### 10.6. Parameter Passing Model
+### 11.6. Parameter Passing Model
 
 Python uses _pass-by-assignment_ (a.k.a. “pass-by-object-reference”):
 
@@ -2112,9 +2113,9 @@ reassign(a)
 print(a)  # 10 — unchanged
 ```
 
-In Python, mutability is a property of the type.  Each built-in type is either mutable or immutable by design.  This cannot be controlled on a per-variable basis.  The section [Mutable And Immutable](#74-mutable-and-immutable) categorizes the built-in types as mutable or immutable.
+In Python, mutability is a property of the type.  Each built-in type is either mutable or immutable by design.  This cannot be controlled on a per-variable basis.  The section [Mutable And Immutable](#84-mutable-and-immutable) categorizes the built-in types as mutable or immutable.
 
-### 10.7. Summary
+### 11.7. Summary
 
 - Use `def` to define functions; they return `None` by default.
 - Use `return` to return a value.
@@ -2123,7 +2124,7 @@ In Python, mutability is a property of the type.  Each built-in type is either m
 - Use `*args` and `**kwargs` for flexible parameters.
 - Python passes arguments by object reference; mutability determines if changes affect the caller.  Mutability is a property of the type.
 
-## 11. Next Topics
+## 12. Next Topics
 
 The next topics that will be described in this guide:
 
