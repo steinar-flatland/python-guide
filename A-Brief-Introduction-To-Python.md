@@ -70,6 +70,13 @@
       - [8.7.1. set](#871-set)
       - [8.7.2. frozenset](#872-frozenset)
     - [8.8. dict](#88-dict)
+      - [8.8.1. Creating Dictionaries](#881-creating-dictionaries)
+      - [8.8.2. Accessing, Adding, and Modifying](#882-accessing-adding-and-modifying)
+      - [8.8.3. Removing Entries](#883-removing-entries)
+      - [8.8.4. Iteration](#884-iteration)
+      - [8.8.5. Dictionary Comprehensions](#885-dictionary-comprehensions)
+      - [8.8.6. Keys Must Be Hashable](#886-keys-must-be-hashable)
+      - [8.8.7. Other Useful Methods](#887-other-useful-methods)
     - [8.9. Types About Types](#89-types-about-types)
       - [8.9.1. NoneType](#891-nonetype)
       - [8.9.2. type](#892-type)
@@ -1717,7 +1724,7 @@ if 5 in primes:
     print("5 is prime")
 ```
 
-Sets are mutable — you can add or remove elements:
+Sets are mutable.  You can add or remove elements:
 
 ```python
 primes.add(11)
@@ -1760,7 +1767,7 @@ Attempting to include a list in a set results in a `TypeError`:
 # set_with_list = {1, [2, 3]}  # TypeError: unhashable type: 'list'
 ```
 
-> 🔒 The elements of a set must be **hashable** — this means they must be immutable and implement a `__hash__()` method.
+> 🔒 The elements of a set must be _hashable_, which means they must be immutable and implement a `__hash__()` method.
 
 #### 8.7.2. frozenset
 
@@ -1801,6 +1808,120 @@ print(d[frozenset([1, 2])])  # "pair"
 > 🔒 Use `frozenset` when you need a set that can safely be used in hashed collections or shared across code without being modified.
 
 ### 8.8. dict
+
+A `dict` (short for _dictionary_) is a mutable, unordered collection of key-value pairs. Dictionaries are sometimes called _maps_ or _hash maps_ in other languages. They allow fast lookup, insertion, and deletion of values based on keys.
+
+Dictionaries are one of Python’s most important and flexible data structures. They're commonly used to represent structured data, configuration, caches, symbol tables, frequency counts, and much more.
+
+#### 8.8.1. Creating Dictionaries
+
+Dictionaries can be defined using curly braces `{}` with `key: value` pairs, or with the `dict()` constructor:
+
+```python
+person = {"name": "Alice", "age": 30, "city": "New York"}
+print(person["name"])           # Alice
+
+empty = dict()
+print(empty)                    # {}
+```
+
+#### 8.8.2. Accessing, Adding, and Modifying
+
+Use square brackets or the `.get()` method to access values by key:
+
+```python
+print(person["city"])           # New York
+print(person.get("age"))        # 30
+#print(person["country"])       # KeyError: 'country'
+print(person.get("country"))    # None (no error)
+
+# Demonstrates common pattern of conditional logic
+# depending upon whether key was found.
+if country := person.get("country"):
+    # do something with found value
+    print(country)              # None
+else:
+    # react to value not found
+    print(None)
+```
+
+You can insert or update values by assignment:
+
+```python
+person["email"] = "alice@example.com"
+person["age"] = 31
+print(person)   # {'name': 'Alice', 'age': 31,
+                #  'city': 'New York', 'email': 'alice@example.com'}
+```
+
+#### 8.8.3. Removing Entries
+
+Dictionaries support multiple ways to remove entries:
+
+```python
+del person["city"]
+print (person)               # {'name': 'Alice', 'age': 31,
+                             #  'email': 'alice@example.com'}
+email = person.pop("email")  # removes and returns the value
+print (person)               # {'name': 'Alice', 'age': 31}
+person.clear()               # removes all items
+print (person)               # {}
+```
+
+#### 8.8.4. Iteration
+
+Dictionaries are iterable. You can iterate over keys, values, or key-value pairs:
+
+```python
+person = {"name": "Alice", "age": 30}
+
+for key in person:
+    print(key)  # name
+                # age
+
+for value in person.values():
+    print(value)  # Alice
+                  # 30
+
+for key, value in person.items():
+    print(f"{key} = {value}")  # name = Alice
+                               # age = 30
+```
+
+> 💡 Starting in Python 3.7, dictionaries preserve insertion order.
+
+#### 8.8.5. Dictionary Comprehensions
+
+Like list comprehensions, dictionary comprehensions provide a concise way to build dictionaries:
+
+```python
+squares = {x: x * x for x in range(5)}
+print(squares)       # {0: 0, 1: 1, 2: 4, 3: 9, 4: 16}
+```
+
+#### 8.8.6. Keys Must Be Hashable
+
+Dictionary keys must be _hashable_, i.e., immutable and uniquely identifiable. Most immutable built-in types (like `int`, `str`, `tuple`, and `frozenset`) are hashable. Mutable types like `list`, `dict`, and `set` are not allowed as keys.
+
+```python
+valid = {"a": 1, 10: "ten", (1, 2): "tuple"}
+# invalid = {[1, 2]: "oops"}  # TypeError: unhashable type: 'list'
+```
+
+#### 8.8.7. Other Useful Methods
+
+Other useful methods include:
+
+- `dict.keys()` — returns a view of keys
+- `dict.values()` — returns a view of values
+- `dict.items()` — returns a view of key-value pairs
+- `dict.update(other)` — merges another dictionary or key-value pairs into this one
+- `dict.pop(key[, default])` — removes and returns a value (or default if key not found)
+- `key in dict` — tests for key membership
+
+For more methods, refer to [Mapping Types](https://docs.python.org/3/library/stdtypes.html#mapping-types-dict) in the official Python documentation.
+
+> 💡 Dictionaries have excellent performance characteristics for most typical use cases.
 
 ### 8.9. Types About Types
 
